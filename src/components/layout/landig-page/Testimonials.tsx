@@ -35,21 +35,21 @@ export default function TestimonialCarousel() {
   };
 
   return (
-    <div className="relative w-full h-64 overflow-hidden">
+    <div id='testimonials' className="relative w-full h-64 overflow-hidden">
       <div className="absolute top-0 left-0 h-full flex items-center">
         {[...testimonials, ...testimonials].map((testimonial, index) => (
           <div
             key={`${testimonial.id}-${index}`}
-            className="absolute w-80 p-4 bg-white rounded-lg shadow-md"
+            className="absolute w-80 p-4 bg-transparent border-[#FAF6E9] border-2 rounded-lg shadow-md"
             style={getItemStyle(index)}
           >
             <div className="flex items-center mb-4">
               <div>
-                <h3 className="font-medium text-gray-900">{testimonial.name}</h3>
-                <p className="text-sm text-gray-500">{testimonial.role}</p>
+                <h3 className="font-bold text-[#FAF6E9]">{testimonial.name}</h3>
+                <p className="text-sm text-[#DFD0B8]">{testimonial.role}</p>
               </div>
             </div>
-            <p className="text-gray-700">{testimonial.content}</p>
+            <p className="text-[#FCEFCB]">{testimonial.content}</p>
           </div>
         ))}
       </div>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import '@fontsource-variable/playfair-display';
-import Navbar from "@/components/layout/navigation/Navbar";
+import Footer from "@/components/layout/footer/Footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,8 +16,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar/>
         {children}
+        <Footer />
       </body>
     </html>
   );

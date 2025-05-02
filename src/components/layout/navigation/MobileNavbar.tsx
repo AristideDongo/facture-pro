@@ -34,7 +34,7 @@ export default function MobileNavbar({ navLinks, isMenuOpen, setIsMenuOpen }: Mo
                   <li key={link.name}>
                     <a 
                       href={link.path}
-                      className="block text-gray-600 hover:text-blue-600 font-medium py-2"
+                      className="block text-black hover:text-orange-600 hover:bg-orange-50 hover:border-b hover:border-orange-500 px-2 transition duration-300 rounded-lg font-medium py-2"
                     >
                       {link.name}
                     </a>

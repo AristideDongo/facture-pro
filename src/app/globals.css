@@ -6,7 +6,7 @@ html {
 }
 
 body {
-  background-color: #1A1C23;
+  background-color:  #000000;
 }
 
 @custom-variant dark (&:is(.dark *));
