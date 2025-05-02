@@ -1,7 +1,10 @@
 import CallToAction from '@/components/common/CallToAction';
-import { Menu, X } from 'lucide-react';
 import React from 'react'
 import { navLink } from './navlinks';
+import clsx from 'clsx';
+import { Fade as Hamburger } from 'hamburger-react'
+import { Button } from '@/components/ui/button';
+import { AnimatePresence, motion } from 'framer-motion';
 
 type MobileNavbarProps = {
     navLinks: navLink[];
@@ -18,16 +21,25 @@ export default function MobileNavbar({ navLinks, isMenuOpen, setIsMenuOpen }: Mo
             <span className="ml-2 font-bold text-lg text-gray-800">FacturePro</span>
           </div>
           
-          <button 
+          <Button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-gray-500 focus:outline-none"
+            className="text-gray-500 bg-transparent hover:bg-transparent shadow-none focus:outline-none"
           >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+            <Hamburger />
+          </Button>
         </header>
-        
+
+        <AnimatePresence>
         {isMenuOpen && (
-          <div className="bg-white shadow-md py-4 px-6 absolute w-full z-10">
+          <motion.div
+          key="mobile-nav"
+            initial={{ x: '-100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '-100%' }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }} 
+          className=
+            'bg-white shadow-md py-4 px-6 max-w-xs h-screen fixed top-14 left-0 w-3/4 z-50'
+          >
             <nav>
               <ul className="space-y-4">
                 {navLinks.map((link) => (
@@ -45,8 +57,9 @@ export default function MobileNavbar({ navLinks, isMenuOpen, setIsMenuOpen }: Mo
                 </div>
               </ul>
             </nav>
-          </div>
+          </motion.div>
         )}
+        </AnimatePresence>
       </div>
     );
   }
