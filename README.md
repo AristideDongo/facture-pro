@@ -1,14 +1,14 @@
-**## FACTURE PRO**
+# **FACTURE-PRO**
 
 <img src="/public/FactureProCapture.png" alt="Description de l'image" width="1100" />
 
-# 🧾 Générateur de Factures et Devis avec Tableau de Bord
+#  Générateur de Factures et Devis avec Tableau de Bord
 
 Application web construite avec **Next.js** et **pnpm** permettant de créer, gérer et exporter des **devis** et **factures**, tout en offrant un petit **tableau de bord** pour le suivi.
 
 ---
 
-## 🚀 Fonctionnalités principales
+##  Fonctionnalités principales
 
 ### 📄 Devis & Factures
 - Création de devis et de factures
@@ -17,12 +17,12 @@ Application web construite avec **Next.js** et **pnpm** permettant de créer, g�
 - Numérotation automatique
 - Gestion des échéances et des statuts (payée, en attente, en retard)
 
-### 👥 Gestion des clients
+###  Gestion des clients
 - Ajout, édition et recherche de clients
 
 ---
 
-## 📊 Tableau de bord
+##  Tableau de bord
 
 - Vue d’ensemble des devis/factures créés
 - Montants facturés et reçus
@@ -31,7 +31,7 @@ Application web construite avec **Next.js** et **pnpm** permettant de créer, g�
 
 ---
 
-## 🛠️ Stack technique
+##  Stack technique
 
 - **Framework** : [Next.js](https://nextjs.org/)
 - **Langage** : TypeScript
@@ -42,9 +42,7 @@ Application web construite avec **Next.js** et **pnpm** permettant de créer, g�
 
 ---
 
-## ⚙️ Installation
-
-### Étapes
+##  Installation
 
 ```bash
 # Cloner le repo
