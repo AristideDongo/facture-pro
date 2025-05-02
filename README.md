@@ -1,4 +1,5 @@
-<p style="font-size: 32px; font-weight: 900;">FACTUREPRO</p>
+**#FACTUREPRO**
+
 <img src="/public/FactureProCapture.png" alt="Description de l'image" width="1100" />
 
 # 🧾 Générateur de Factures et Devis avec Tableau de Bord
@@ -54,4 +55,4 @@ cd facture-pro
 pnpm install
 
 # Lancer le projet en développement
-pnpm dev
+pnpm run dev
