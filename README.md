@@ -1,5 +1,5 @@
-<p style="font-size: 32px; font-weight: bold;">FACTUREPRO</p>
-<img src="/public/FactureProCapture.png" alt="Description de l'image" width="300" />
+<p style="font-size: 32px; font-weight: 900;">FACTUREPRO</p>
+<img src="/public/FactureProCapture.png" alt="Description de l'image" width="1100" />
 
 # 🧾 Générateur de Factures et Devis avec Tableau de Bord
 
