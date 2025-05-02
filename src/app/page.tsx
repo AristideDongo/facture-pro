@@ -1,3 +1,4 @@
+import Footer from "@/components/layout/footer/Footer";
 import FactureBanner from "@/components/layout/landig-page/Banner";
 import Faq from "@/components/layout/landig-page/Faq";
 import Feature from "@/components/layout/landig-page/Featured";
@@ -16,6 +17,7 @@ export default function Home() {
         <TestimonialCarousel />
         <Faq />
       </main>
+      <Footer />
     </>
   );
 }

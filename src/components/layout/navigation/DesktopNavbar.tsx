@@ -10,7 +10,7 @@ type DesktopProps = {
 
 export default function DesktopNavbar({ navLinks } : DesktopProps) {
     return (
-      <header className="hidden md:flex w-full fixed z-50 bg-white shadow-sm h-16 items-center px-6">
+      <header className="hidden md:flex w-full fixed z-50 bg-orange-50 shadow-sm h-16 items-center px-6">
         <div className="flex items-center">
           <span className="ml-2 font-bold text-xl text-gray-800">FacturePro</span>
         </div>
