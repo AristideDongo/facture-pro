@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p style="font-size: 32px; font-weight: bold;">FACTUREPRO</p>
+<img src="/public/FactureProCapture.png" alt="Description de l'image" width="300" />
 
-## Getting Started
+# 🧾 Générateur de Factures et Devis avec Tableau de Bord
 
-First, run the development server:
+Application web construite avec **Next.js** et **pnpm** permettant de créer, gérer et exporter des **devis** et **factures**, tout en offrant un petit **tableau de bord** pour le suivi.
+
+---
+
+## 🚀 Fonctionnalités principales
+
+### 📄 Devis & Factures
+- Création de devis et de factures
+- Export PDF des documents
+- Calcul automatique des totaux (HT, TVA, TTC)
+- Numérotation automatique
+- Gestion des échéances et des statuts (payée, en attente, en retard)
+
+### 👥 Gestion des clients
+- Ajout, édition et recherche de clients
+
+---
+
+## 📊 Tableau de bord
+
+- Vue d’ensemble des devis/factures créés
+- Montants facturés et reçus
+- Liste des dernières activités (devis/factures récents)
+- Filtres : client, période, statut
+
+---
+
+## 🛠️ Stack technique
+
+- **Framework** : [Next.js](https://nextjs.org/)
+- **Langage** : TypeScript
+- **Package Manager** : [pnpm](https://pnpm.io/)
+- **Formulaires** : `react-hook-form` + `zod`
+- **PDF** : (Pas encore déterminé.)
+- **i18n** : `i18n-iso-countries` pour la sélection des pays
+
+---
+
+## ⚙️ Installation
+
+### Étapes
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# Cloner le repo
+git clone https://github.com/AristideDongo/facture-pro.git
+cd facture-pro
+
+# Installer les dépendances
+pnpm install
+
+# Lancer le projet en développement
 pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
