@@ -22,8 +22,6 @@ export function CompanyInfoForm() {
       phone: "",
       email: "",
       website: "",
-      taxId: "",
-      bankInfo: "",
       logo: "",
     },
   })
@@ -128,35 +126,7 @@ export function CompanyInfoForm() {
               </FormItem>
             )}
           />
-
-          <FormField
-            control={form.control}
-            name="taxId"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>SIRET / Numéro de TVA *</FormLabel>
-                <FormControl>
-                  <Input placeholder="Identifiant fiscal" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
         </div>
-
-        <FormField
-          control={form.control}
-          name="bankInfo"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Informations bancaires</FormLabel>
-              <FormControl>
-                <Textarea placeholder="IBAN, BIC, etc." {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
 
         <FormField
           control={form.control}

@@ -2,7 +2,6 @@
 
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
 import { useEffect } from "react"
 import { CalendarIcon } from "lucide-react"
 import { format } from "date-fns"
@@ -18,8 +17,6 @@ import { cn } from "@/lib/utils"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useInvoiceStore } from "@/hooks/invoices/useInvoiceForm"
 import { invoiceDetailsSchema, InvoiceDetailsValues } from "@/types/invoiceSchema"
-
-// Schéma de validation pour les détails de la facture
 
 export function InvoiceDetailsForm() {
   const { invoiceDetails, setInvoiceDetails, setInvoiceDetailsValid } = useInvoiceStore()
@@ -74,7 +71,7 @@ export function InvoiceDetailsForm() {
               <FormItem>
                 <FormLabel>Numéro de facture *</FormLabel>
                 <FormControl>
-                  <Input placeholder="INV-2023-001" {...field} />
+                  <Input placeholder="INV-001" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -94,6 +91,7 @@ export function InvoiceDetailsForm() {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
+                  <SelectItem value="XOF">XOF (XOF)</SelectItem>
                     <SelectItem value="EUR">Euro (€)</SelectItem>
                     <SelectItem value="USD">Dollar US ($)</SelectItem>
                     <SelectItem value="GBP">Livre Sterling (£)</SelectItem>
@@ -194,7 +192,6 @@ export function InvoiceDetailsForm() {
                     <SelectItem value="Carte bancaire">Carte bancaire</SelectItem>
                     <SelectItem value="Chèque">Chèque</SelectItem>
                     <SelectItem value="Espèces">Espèces</SelectItem>
-                    <SelectItem value="PayPal">PayPal</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />

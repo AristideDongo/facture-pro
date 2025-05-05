@@ -8,7 +8,7 @@ export const invoiceDetailsSchema = z.object({
   paymentMethod: z.string().optional(),
   notes: z.string().optional(),
   terms: z.string().optional(),
-  currency: z.string().default("XOF"),
+  currency: z.string(),
 })
 
 export type InvoiceDetailsValues = z.infer<typeof invoiceDetailsSchema>
@@ -20,8 +20,6 @@ export const companyInfoSchema = z.object({
   phone: z.string().min(10, { message: "Numéro de téléphone invalide" }),
   email: z.string().email({ message: "Email invalide" }),
   website: z.string().url({ message: "URL invalide" }).optional().or(z.literal("")),
-  taxId: z.string().min(3, { message: "Identifiant fiscal requis" }),
-  bankInfo: z.string().optional(),
   logo: z.string().optional(),
 })
 
@@ -33,7 +31,6 @@ export const clientInfoSchema = z.object({
   email: z.string().email({ message: "Email invalide" }),
   address: z.string().min(5, { message: "L'adresse doit contenir au moins 5 caractères" }),
   phone: z.string().min(10, { message: "Numéro de téléphone invalide" }).optional(),
-  taxId: z.string().optional(),
 })
 
 export type ClientInfoValues = z.infer<typeof clientInfoSchema>

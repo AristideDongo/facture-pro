@@ -2,7 +2,6 @@
 
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
 import { useEffect } from "react"
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
@@ -21,7 +20,6 @@ export function ClientInfoForm() {
       email: "",
       address: "",
       phone: "",
-      taxId: "",
     },
   })
 
@@ -103,20 +101,6 @@ export function ClientInfoForm() {
               <FormLabel>Téléphone</FormLabel>
               <FormControl>
                 <Input placeholder="Numéro de téléphone" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="taxId"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Numéro de TVA / SIRET</FormLabel>
-              <FormControl>
-                <Input placeholder="Identifiant fiscal" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

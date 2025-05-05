@@ -214,7 +214,7 @@ export function InvoiceGenerator() {
             !isClientInfoValid || !isCompanyInfoValid || !areItemsValid || !isInvoiceDetailsValid || isGenerating
           }
           size="lg"
-          className="w-full md:w-auto"
+          className="w-full md:w-auto bg-orange-400 text-black hover:bg-orange-600"
         >
           {isGenerating ? (
             <>

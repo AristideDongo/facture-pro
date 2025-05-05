@@ -53,7 +53,7 @@ export function InvoicePreview() {
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("fr-FR", {
       style: "currency",
-      currency: invoiceDetails?.currency || "EUR",
+      currency: invoiceDetails?.currency || "XOF",
     }).format(amount)
   }
 
@@ -97,7 +97,6 @@ export function InvoicePreview() {
                 <p>{companyInfo.phone}</p>
                 <p>{companyInfo.email}</p>
                 {companyInfo.website && <p>{companyInfo.website}</p>}
-                <p>SIRET/TVA: {companyInfo.taxId}</p>
               </div>
             </div>
 
@@ -108,7 +107,6 @@ export function InvoicePreview() {
                 <p className="whitespace-pre-line">{clientInfo.address}</p>
                 {clientInfo.phone && <p>{clientInfo.phone}</p>}
                 <p>{clientInfo.email}</p>
-                {clientInfo.taxId && <p>SIRET/TVA: {clientInfo.taxId}</p>}
               </div>
             </div>
           </div>
@@ -196,14 +194,6 @@ export function InvoicePreview() {
                   <p className="text-sm text-muted-foreground">{invoiceDetails.terms}</p>
                 </div>
               )}
-            </div>
-          )}
-
-          {/* Informations bancaires */}
-          {companyInfo.bankInfo && (
-            <div className="mt-4">
-              <h3 className="font-semibold mb-1">Informations bancaires</h3>
-              <p className="text-sm text-muted-foreground whitespace-pre-line">{companyInfo.bankInfo}</p>
             </div>
           )}
 

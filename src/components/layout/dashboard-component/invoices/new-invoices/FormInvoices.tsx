@@ -154,7 +154,7 @@ export function ItemsForm() {
                       name={`items.${index}.unitPrice`}
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Prix unitaire (€) *</FormLabel>
+                          <FormLabel>Prix unitaire (XOF) *</FormLabel>
                           <FormControl>
                             <Input type="number" min="0" step="0.01" {...field} />
                           </FormControl>
@@ -198,10 +198,10 @@ export function ItemsForm() {
                     <span className="text-sm font-medium mb-2">Total</span>
                     <div className="h-10 px-3 py-2 border rounded-md flex items-center font-medium">
                       {form.watch(`items.${index}`)
-                        ? new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
+                        ? new Intl.NumberFormat("fr-FR", { style: "currency", currency: "XOF" }).format(
                             calculateItemTotal(form.watch(`items.${index}`)),
                           )
-                        : "0,00 €"}
+                        : "0,00 XOF"}
                     </div>
                   </div>
                 </div>
