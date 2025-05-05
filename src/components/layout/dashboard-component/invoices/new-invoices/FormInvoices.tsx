@@ -1,295 +1,279 @@
 "use client"
 
-import type React from "react"
+import { useFieldArray, useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod"
+import { useEffect } from "react"
+import { PlusCircle, Trash2 } from "lucide-react"
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ArrowLeft, Plus, Trash2 } from "lucide-react"
-import Link from "next/link"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Card, CardContent } from "@/components/ui/card"
+import { useInvoiceStore } from "@/hooks/invoices/useInvoiceForm"
 
-// Type pour les éléments de facture
-type InvoiceItem = {
-  description: string
-  quantity: number
-  price: number
-  total: number
-}
+// Schéma de validation pour un article
+const itemSchema = z.object({
+  description: z.string().min(2, { message: "La description doit contenir au moins 2 caractères" }),
+  quantity: z.coerce.number().positive({ message: "La quantité doit être positive" }),
+  unitPrice: z.coerce.number().positive({ message: "Le prix unitaire doit être positif" }),
+  taxRate: z.coerce.number().min(0, { message: "Le taux de TVA ne peut pas être négatif" }),
+  discount: z.coerce.number().min(0, { message: "La remise ne peut pas être négative" }).optional(),
+  notes: z.string().optional(),
+})
 
-export default function InvoiceForm() {
-  const [items, setItems] = useState<InvoiceItem[]>([{ description: "", quantity: 1, price: 0, total: 0 }])
+// Schéma de validation pour la liste d'articles
+export const itemsSchema = z.object({
+  items: z.array(itemSchema).min(1, { message: "Au moins un article est requis" }),
+})
 
-  // État pour les informations de base de la facture
-  const [invoiceInfo, setInvoiceInfo] = useState({
-    number: "FACT-0001",
-    date: new Date().toISOString().split("T")[0],
-    dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
+export type ItemValues = z.infer<typeof itemSchema>
+export type ItemsValues = z.infer<typeof itemsSchema>
+
+export function ItemsForm() {
+  const { items, setItems, setItemsValid } = useInvoiceStore()
+
+  const form = useForm<ItemsValues>({
+    resolver: zodResolver(itemsSchema),
+    defaultValues: {
+      items:
+        items && items.length > 0
+          ? items
+          : [{ description: "", quantity: 1, unitPrice: 0, taxRate: 20, discount: 0, notes: "" }],
+    },
   })
 
-  // État pour les informations client
-  const [clientInfo, setClientInfo] = useState({
-    name: "",
-    email: "",
-    address: "",
+  const { fields, append, remove } = useFieldArray({
+    control: form.control,
+    name: "items",
   })
 
-  // Ajouter un nouvel élément à la facture
-  const addItem = () => {
-    setItems([...items, { description: "", quantity: 1, price: 0, total: 0 }])
-  }
+  const { formState } = form
 
-  // Supprimer un élément de la facture
-  const removeItem = (index: number) => {
-    if (items.length > 1) {
-      const newItems = [...items]
-      newItems.splice(index, 1)
-      setItems(newItems)
-    }
-  }
-
-  // Mettre à jour un élément de facture
-  const updateItem = (index: number, field: keyof InvoiceItem, value: string | number) => {
-    const newItems = [...items]
-
-    // Convertir en nombre si nécessaire
-    const numValue = field === "description" ? value : Number(value)
-
-    // Mettre à jour le champ
-    newItems[index] = {
-      ...newItems[index],
-      [field]: numValue,
-    }
-
-    // Recalculer le total si quantité ou prix change
-    if (field === "quantity" || field === "price") {
-      newItems[index].total = Number(newItems[index].quantity) * Number(newItems[index].price)
-    }
-
-    setItems(newItems)
-  }
-
-  // Calculer le sous-total
-  const subtotal = items.reduce((sum, item) => sum + item.total, 0)
-
-  // Calculer la TVA (20%)
-  const taxRate = 20
-  const tax = subtotal * (taxRate / 100)
-
-  // Calculer le total
-  const total = subtotal + tax
-
-  // Gérer la soumission du formulaire
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-
-    // Afficher les données (dans une application réelle, vous les enverriez à une API)
-    console.log({
-      invoiceInfo,
-      clientInfo,
-      items,
-      subtotal,
-      tax,
-      total,
+  // Mettre à jour le store quand les valeurs du formulaire changent
+  useEffect(() => {
+    const subscription = form.watch(() => {
+      if (form.formState.isDirty) {
+        setItems(form.getValues().items)
+      }
     })
 
-    // Rediriger vers la liste des factures (simulation)
-    alert("Facture créée avec succès!")
+    return () => subscription.unsubscribe()
+  }, [form, setItems])
+
+  // Mettre à jour la validité du formulaire dans le store
+  useEffect(() => {
+    setItemsValid(formState.isValid)
+
+    // Si le formulaire est valide et a été modifié, mettre à jour le store
+    if (formState.isDirty) {
+      setItems(form.getValues().items)
+    }
+  }, [formState.isValid, formState.isDirty, setItemsValid, setItems, form])
+
+  // Calculer le total
+  const calculateItemTotal = (item: ItemValues) => {
+    const subtotal = item.quantity * item.unitPrice
+    const discountAmount = (subtotal * (item.discount || 0)) / 100
+    const afterDiscount = subtotal - discountAmount
+    const taxAmount = (afterDiscount * item.taxRate) / 100
+    return afterDiscount + taxAmount
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <main className="flex-1 container py-10">
-
-        <div className="grid gap-8 md:grid-cols-2">
-          {/* Informations de la facture */}
-          <Card>
-            <CardContent className="pt-6">
-              <h2 className="text-xl font-semibold mb-4">Informations de la facture</h2>
-              <div className="space-y-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="invoice-number">Numéro de facture</Label>
-                  <Input
-                    id="invoice-number"
-                    value={invoiceInfo.number}
-                    onChange={(e) => setInvoiceInfo({ ...invoiceInfo, number: e.target.value })}
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="invoice-date">Date de facture</Label>
-                  <Input
-                    id="invoice-date"
-                    type="date"
-                    value={invoiceInfo.date}
-                    onChange={(e) => setInvoiceInfo({ ...invoiceInfo, date: e.target.value })}
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="due-date">Date d'échéance</Label>
-                  <Input
-                    id="due-date"
-                    type="date"
-                    value={invoiceInfo.dueDate}
-                    onChange={(e) => setInvoiceInfo({ ...invoiceInfo, dueDate: e.target.value })}
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="tax-rate">Taux de TVA (%)</Label>
-                  <Select defaultValue="20">
-                    <SelectTrigger id="tax-rate">
-                      <SelectValue placeholder="Sélectionnez un taux" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="0">0%</SelectItem>
-                      <SelectItem value="5.5">5.5%</SelectItem>
-                      <SelectItem value="10">10%</SelectItem>
-                      <SelectItem value="20">20%</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Informations du client */}
-          <Card>
-            <CardContent className="pt-6">
-              <h2 className="text-xl font-semibold mb-4">Informations du client</h2>
-              <div className="space-y-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="client-name">Nom du client</Label>
-                  <Input
-                    id="client-name"
-                    placeholder="Nom du client ou de l'entreprise"
-                    value={clientInfo.name}
-                    onChange={(e) => setClientInfo({ ...clientInfo, name: e.target.value })}
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="client-email">Email</Label>
-                  <Input
-                    id="client-email"
-                    type="email"
-                    placeholder="client@example.com"
-                    value={clientInfo.email}
-                    onChange={(e) => setClientInfo({ ...clientInfo, email: e.target.value })}
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="client-address">Adresse</Label>
-                  <Textarea
-                    id="client-address"
-                    placeholder="Adresse complète"
-                    value={clientInfo.address}
-                    onChange={(e) => setClientInfo({ ...clientInfo, address: e.target.value })}
-                  />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Articles de la facture */}
-        <Card className="mt-8">
-          <CardContent className="pt-6">
-            <h2 className="text-xl font-semibold mb-4">Articles</h2>
-
-            {items.map((item, index) => (
-              <div key={index} className="grid gap-4 p-4 border rounded-md mb-4">
-                <div className="grid gap-2">
-                  <Label htmlFor={`item-description-${index}`}>Description</Label>
-                  <Input
-                    id={`item-description-${index}`}
-                    value={item.description}
-                    onChange={(e) => updateItem(index, "description", e.target.value)}
-                    placeholder="Description de l'article ou du service"
-                  />
-                </div>
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="grid gap-2">
-                    <Label htmlFor={`item-quantity-${index}`}>Quantité</Label>
-                    <Input
-                      id={`item-quantity-${index}`}
-                      type="number"
-                      min="1"
-                      value={item.quantity}
-                      onChange={(e) => updateItem(index, "quantity", e.target.value)}
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor={`item-price-${index}`}>Prix unitaire (€)</Label>
-                    <Input
-                      id={`item-price-${index}`}
-                      type="number"
-                      min="0"
-                      step="0.01"
-                      value={item.price}
-                      onChange={(e) => updateItem(index, "price", e.target.value)}
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor={`item-total-${index}`}>Total (€)</Label>
-                    <Input id={`item-total-${index}`} type="number" value={item.total.toFixed(2)} disabled />
-                  </div>
-                </div>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="ml-auto"
-                  onClick={() => removeItem(index)}
-                  disabled={items.length === 1}
-                >
-                  <Trash2 className="h-4 w-4" />
-                  <span className="sr-only">Supprimer l'article</span>
-                </Button>
-              </div>
-            ))}
-
-            <Button variant="outline" className="w-full mb-6" onClick={addItem}>
-              <Plus className="mr-2 h-4 w-4" />
-              Ajouter un article
-            </Button>
-
-            {/* Totaux */}
-            <div className="space-y-2 pt-4 border-t">
-              <div className="flex justify-between">
-                <span>Sous-total:</span>
-                <span>{subtotal.toFixed(2)} €</span>
-              </div>
-              <div className="flex justify-between">
-                <span>TVA ({taxRate}%):</span>
-                <span>{tax.toFixed(2)} €</span>
-              </div>
-              <div className="flex justify-between font-bold text-lg">
-                <span>Total:</span>
-                <span className="text-primary">{total.toFixed(2)} €</span>
-              </div>
-            </div>
-
-            {/* Notes */}
-            <div className="grid gap-2 mt-6">
-              <Label htmlFor="notes">Notes</Label>
-              <Textarea id="notes" placeholder="Conditions de paiement, notes supplémentaires..." />
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Boutons d'action */}
-        <div className="flex justify-end gap-4 mt-8">
-          <Link href="/dashboard/invoices">
-            <Button variant="outline">Annuler</Button>
-          </Link>
+    <Form {...form}>
+      <form className="space-y-6">
+        <div className="flex justify-end">
           <Button
-            onClick={handleSubmit}
-            className="bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity"
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={() =>
+              append({
+                description: "",
+                quantity: 1,
+                unitPrice: 0,
+                taxRate: 20,
+                discount: 0,
+                notes: "",
+              })
+            }
           >
-            Enregistrer la facture
+            <PlusCircle className="mr-2 h-4 w-4" />
+            Ajouter un article
           </Button>
         </div>
-      </main>
-    </div>
+
+        <div className="space-y-4">
+          {fields.map((field, index) => (
+            <Card key={field.id} className="overflow-hidden">
+              <CardContent className="p-4">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="font-medium">Article {index + 1}</h3>
+                  {fields.length > 1 && (
+                    <Button type="button" variant="ghost" size="sm" onClick={() => remove(index)}>
+                      <Trash2 className="h-4 w-4 text-destructive" />
+                    </Button>
+                  )}
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <FormField
+                    control={form.control}
+                    name={`items.${index}.description`}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Description *</FormLabel>
+                        <FormControl>
+                          <Textarea placeholder="Description de l'article ou service" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name={`items.${index}.quantity`}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Quantité *</FormLabel>
+                          <FormControl>
+                            <Input type="number" min="1" step="1" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name={`items.${index}.unitPrice`}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Prix unitaire (€) *</FormLabel>
+                          <FormControl>
+                            <Input type="number" min="0" step="0.01" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <FormField
+                    control={form.control}
+                    name={`items.${index}.taxRate`}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Taux de TVA (%) *</FormLabel>
+                        <FormControl>
+                          <Input type="number" min="0" step="0.1" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name={`items.${index}.discount`}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Remise (%)</FormLabel>
+                        <FormControl>
+                          <Input type="number" min="0" max="100" step="0.1" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <div className="flex flex-col justify-end">
+                    <span className="text-sm font-medium mb-2">Total</span>
+                    <div className="h-10 px-3 py-2 border rounded-md flex items-center font-medium">
+                      {form.watch(`items.${index}`)
+                        ? new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
+                            calculateItemTotal(form.watch(`items.${index}`)),
+                          )
+                        : "0,00 €"}
+                    </div>
+                  </div>
+                </div>
+
+                <FormField
+                  control={form.control}
+                  name={`items.${index}.notes`}
+                  render={({ field }) => (
+                    <FormItem className="mt-4">
+                      <FormLabel>Notes</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder="Notes supplémentaires" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {form.formState.errors.items?.message && (
+          <p className="text-sm font-medium text-destructive">{form.formState.errors.items?.message}</p>
+        )}
+
+        {fields.length > 0 && (
+          <div className="mt-6">
+            <h3 className="font-medium mb-2">Récapitulatif</h3>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Description</TableHead>
+                  <TableHead className="text-right">Quantité</TableHead>
+                  <TableHead className="text-right">Prix unitaire</TableHead>
+                  <TableHead className="text-right">TVA</TableHead>
+                  <TableHead className="text-right">Remise</TableHead>
+                  <TableHead className="text-right">Total</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {form.watch("items").map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell className="font-medium">{item.description || "-"}</TableCell>
+                    <TableCell className="text-right">{item.quantity}</TableCell>
+                    <TableCell className="text-right">
+                      {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(item.unitPrice)}
+                    </TableCell>
+                    <TableCell className="text-right">{item.taxRate}%</TableCell>
+                    <TableCell className="text-right">{item.discount || 0}%</TableCell>
+                    <TableCell className="text-right">
+                      {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
+                        calculateItemTotal(item),
+                      )}
+                    </TableCell>
+                  </TableRow>
+                ))}
+                <TableRow>
+                  <TableCell colSpan={5} className="text-right font-bold">
+                    Total
+                  </TableCell>
+                  <TableCell className="text-right font-bold">
+                    {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
+                      form.watch("items").reduce((sum, item) => sum + calculateItemTotal(item), 0),
+                    )}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
+        )}
+      </form>
+    </Form>
   )
 }

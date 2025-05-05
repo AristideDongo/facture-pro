@@ -1,6 +1,7 @@
 'use client'
 import NavbarDashboard from '@/components/layout/navigation/dashboard-navigation/NavbarDashboard';
 import SidebarDashboard from '@/components/layout/navigation/dashboard-navigation/SidebarDashboard';
+import { Toaster } from 'sonner';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -18,6 +19,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           <div className="space-y-6">
             {children}
           </div>
+          <Toaster />
         </main>
       </div>
     </div>
