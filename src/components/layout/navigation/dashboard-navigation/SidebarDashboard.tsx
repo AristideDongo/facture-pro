@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react';
-import { Menu, X, Home, Settings, User, FileText, HelpCircle, ChevronRight, ChevronLeft } from 'lucide-react';
+import { Menu, X, Home, Settings, User, FileText, HelpCircle, ChevronRight, ChevronLeft, FilePlus } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
@@ -31,10 +31,11 @@ export default function SidebarDashboard({ className = '' }: SidebarProps) {
 
   const menuItems = [
     { icon: <Home size={20} />, title: 'Tableau de bord', path: '/dashboard/overview' },
-    { icon: <User size={20} />, title: 'Facture', path: '/dashboard/invoices' },
-    { icon: <FileText size={20} />, title: 'Devis', path: '/dashboard/quotes' },
-    { icon: <Settings size={20} />, title: 'Paramètres', path: '/settings' },
-    { icon: <HelpCircle size={20} />, title: 'Aide', path: '/help' },
+    { icon: <FileText size={20} />, title: 'Facture', path: '/dashboard/invoices' },
+    { icon: <FilePlus size={20} />, title: 'Devis', path: '/dashboard/quotes' },
+    { icon: <User size={20} />, title: 'Client', path: '/dashboard/customers' },
+    { icon: <Settings size={20} />, title: 'Paramètres', path: '/dashboard/settings' },
+    { icon: <HelpCircle size={20} />, title: 'Aide', path: '/' },
   ];
 
   return (
@@ -49,7 +50,7 @@ export default function SidebarDashboard({ className = '' }: SidebarProps) {
 
       <aside 
         className={`
-          fixed md:relative z-30
+          fixed md:relative z-50
           h-full bg-gradient-to-b from-orange-600 to-red-500 text-white
           transition-all duration-300 ease-in-out
           ${isOpen ? 'w-64' : 'w-0 md:w-16'} 
