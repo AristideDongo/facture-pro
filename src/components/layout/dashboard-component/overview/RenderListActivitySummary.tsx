@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { activitySummary } from '@/data/activity-summaryData'
+import { getStatus } from '@/lib/getSatus';
 import React from 'react'
-import { getStatus } from './getSatus'
 
 
 export default function RenderListActivitySummary(fliteredActivitySummary : typeof activitySummary ) {
