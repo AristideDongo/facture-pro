@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { InvoiceForm } from "@/components/layout/dashboard-component/invoices/new-invoices/FormInvoices"
+import InvoiceForm from "@/components/layout/dashboard-component/invoices/new-invoices/FormInvoices"
 
 
 export default function NewInvoicePage() {

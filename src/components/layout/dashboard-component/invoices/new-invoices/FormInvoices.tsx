@@ -1,206 +1,154 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import {
-  useForm,
-  useFieldArray,
-  Controller,
-  FormProvider,
-} from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import Link from "next/link";
-import { Plus, Trash2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { useInvoiceForm } from "@/hooks/invoices/useInvoiceForm";
-import { InvoicePreview } from "../InvoicePreview";
+import type React from "react"
 
-export function InvoiceForm() {
-  const {
-    form,
-    taxRate,
-    handleSubmit,
-    calculateSubtotal,
-    calculateTax,
-    calculateTotal,
-    handleAddItem,
-    handleRemoveItem,
-    isPreviewOpen,
-    invoiceData,
-    handleClosePreview,
-    handleDownloadPDF,
-  } = useInvoiceForm();
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { ArrowLeft, Plus, Trash2 } from "lucide-react"
+import Link from "next/link"
 
-  const {
-    control,
-    register,
-    watch,
-    formState: { errors },
-  } = form;
+// Type pour les éléments de facture
+type InvoiceItem = {
+  description: string
+  quantity: number
+  price: number
+  total: number
+}
 
-  const { fields } = useFieldArray({
-    control,
-    name: "items",
-  });
+export default function InvoiceForm() {
+  const [items, setItems] = useState<InvoiceItem[]>([{ description: "", quantity: 1, price: 0, total: 0 }])
 
-  // Observer les articles pour calculer les totaux
-  const items = watch("items");
-  const subtotal = calculateSubtotal(items);
-  const tax = calculateTax(subtotal, taxRate);
-  const total = calculateTotal(subtotal, tax);
+  // État pour les informations de base de la facture
+  const [invoiceInfo, setInvoiceInfo] = useState({
+    number: "FACT-0001",
+    date: new Date().toISOString().split("T")[0],
+    dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
+  })
+
+  // État pour les informations client
+  const [clientInfo, setClientInfo] = useState({
+    name: "",
+    email: "",
+    address: "",
+  })
+
+  // Ajouter un nouvel élément à la facture
+  const addItem = () => {
+    setItems([...items, { description: "", quantity: 1, price: 0, total: 0 }])
+  }
+
+  // Supprimer un élément de la facture
+  const removeItem = (index: number) => {
+    if (items.length > 1) {
+      const newItems = [...items]
+      newItems.splice(index, 1)
+      setItems(newItems)
+    }
+  }
+
+  // Mettre à jour un élément de facture
+  const updateItem = (index: number, field: keyof InvoiceItem, value: string | number) => {
+    const newItems = [...items]
+
+    // Convertir en nombre si nécessaire
+    const numValue = field === "description" ? value : Number(value)
+
+    // Mettre à jour le champ
+    newItems[index] = {
+      ...newItems[index],
+      [field]: numValue,
+    }
+
+    // Recalculer le total si quantité ou prix change
+    if (field === "quantity" || field === "price") {
+      newItems[index].total = Number(newItems[index].quantity) * Number(newItems[index].price)
+    }
+
+    setItems(newItems)
+  }
+
+  // Calculer le sous-total
+  const subtotal = items.reduce((sum, item) => sum + item.total, 0)
+
+  // Calculer la TVA (20%)
+  const taxRate = 20
+  const tax = subtotal * (taxRate / 100)
+
+  // Calculer le total
+  const total = subtotal + tax
+
+  // Gérer la soumission du formulaire
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+
+    // Afficher les données (dans une application réelle, vous les enverriez à une API)
+    console.log({
+      invoiceInfo,
+      clientInfo,
+      items,
+      subtotal,
+      tax,
+      total,
+    })
+
+    // Rediriger vers la liste des factures (simulation)
+    alert("Facture créée avec succès!")
+  }
 
   return (
-    <FormProvider {...form}>
-      <form onSubmit={handleSubmit}>
-        <Card>
-          <CardContent className="pt-6">
-            <h2 className="text-xl font-semibold mb-4">
-              Informations de l'entreprise
-            </h2>
-            <div className="space-y-4">
-              <div className="grid gap-2">
-                <Label htmlFor="compagnyName">Nom de l'entreprise</Label>
-                <Input
-                  id="compagnyName"
-                  placeholder="Nom du client"
-                  {...register('compagnyName')}
-                  aria-invalid={errors.compagnyName ? "true" : "false"}
-                />
-                {errors.compagnyName && (
-                  <p className="text-sm text-red-500">
-                    {errors.compagnyName.message}
-                  </p>
-                )}
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="compagnyEmail">Email</Label>
-                <Input
-                  id="compagnyEmail"
-                  type="email"
-                  placeholder="compagny@example.com"
-                  {...register('compagnyEmail')}
-                  aria-invalid={errors.compagnyEmail ? "true" : "false"}
-                />
-                {errors.compagnyEmail && (
-                  <p className="text-sm text-red-500">
-                    {errors.compagnyEmail.message}
-                  </p>
-                )}
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="compagnyAddress">Adresse</Label>
-                <Textarea
-                  id="compagnyAddress"
-                  placeholder="Adresse complète"
-                  {...register("compagnyAddress")}
-                  aria-invalid={errors.compagnyAddress ? "true" : "false"}
-                />
-                {errors.compagnyAddress && (
-                  <p className="text-sm text-red-500">
-                    {errors.compagnyAddress.message}
-                  </p>
-                )}
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="compagnyPhone">Numéro de téléphone</Label>
-                <Input
-                  id="compagnyPhone"
-                  placeholder="XXXXXXXX"
-                  {...register("compagnyPhone")}
-                  aria-invalid={errors.compagnyPhone ? "true" : "false"}
-                />
-                {errors.compagnyPhone && (
-                  <p className="text-sm text-red-500">
-                    {errors.compagnyPhone.message}
-                  </p>
-                )}
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+    <div className="flex min-h-screen flex-col">
+      <main className="flex-1 container py-10">
 
-        <div className="grid mt-8 gap-8 md:grid-cols-2">
+        <div className="grid gap-8 md:grid-cols-2">
           {/* Informations de la facture */}
           <Card>
             <CardContent className="pt-6">
-              <h2 className="text-xl font-semibold mb-4">
-                Informations de la facture
-              </h2>
+              <h2 className="text-xl font-semibold mb-4">Informations de la facture</h2>
               <div className="space-y-4">
                 <div className="grid gap-2">
-                  <Label htmlFor="invoiceNumber">Numéro de facture</Label>
+                  <Label htmlFor="invoice-number">Numéro de facture</Label>
                   <Input
-                    id="invoiceNumber"
-                    {...register("invoiceNumber")}
-                    aria-invalid={errors.invoiceNumber ? "true" : "false"}
+                    id="invoice-number"
+                    value={invoiceInfo.number}
+                    onChange={(e) => setInvoiceInfo({ ...invoiceInfo, number: e.target.value })}
                   />
-                  {errors.invoiceNumber && (
-                    <p className="text-sm text-red-500">
-                      {errors.invoiceNumber.message}
-                    </p>
-                  )}
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="invoiceDate">Date de facture</Label>
+                  <Label htmlFor="invoice-date">Date de facture</Label>
                   <Input
-                    id="invoiceDate"
+                    id="invoice-date"
                     type="date"
-                    {...register("invoiceDate")}
-                    aria-invalid={errors.invoiceDate ? "true" : "false"}
+                    value={invoiceInfo.date}
+                    onChange={(e) => setInvoiceInfo({ ...invoiceInfo, date: e.target.value })}
                   />
-                  {errors.invoiceDate && (
-                    <p className="text-sm text-red-500">
-                      {errors.invoiceDate.message}
-                    </p>
-                  )}
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="dueDate">Date d'échéance</Label>
+                  <Label htmlFor="due-date">Date d'échéance</Label>
                   <Input
-                    id="dueDate"
+                    id="due-date"
                     type="date"
-                    {...register("dueDate")}
-                    aria-invalid={errors.dueDate ? "true" : "false"}
+                    value={invoiceInfo.dueDate}
+                    onChange={(e) => setInvoiceInfo({ ...invoiceInfo, dueDate: e.target.value })}
                   />
-                  {errors.dueDate && (
-                    <p className="text-sm text-red-500">
-                      {errors.dueDate.message}
-                    </p>
-                  )}
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="taxRate">Taux de TVA (%)</Label>
-                  <Controller
-                    name="taxRate"
-                    control={control}
-                    render={({ field }) => (
-                      <Select
-                        value={field.value.toString()}
-                        onValueChange={(value) => field.onChange(Number(value))}
-                      >
-                        <SelectTrigger id="taxRate">
-                          <SelectValue placeholder="Sélectionnez un taux" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="0">0%</SelectItem>
-                          <SelectItem value="5.5">5.5%</SelectItem>
-                          <SelectItem value="10">10%</SelectItem>
-                          <SelectItem value="20">20%</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    )}
-                  />
+                  <Label htmlFor="tax-rate">Taux de TVA (%)</Label>
+                  <Select defaultValue="20">
+                    <SelectTrigger id="tax-rate">
+                      <SelectValue placeholder="Sélectionnez un taux" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="0">0%</SelectItem>
+                      <SelectItem value="5.5">5.5%</SelectItem>
+                      <SelectItem value="10">10%</SelectItem>
+                      <SelectItem value="20">20%</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
             </CardContent>
@@ -209,67 +157,36 @@ export function InvoiceForm() {
           {/* Informations du client */}
           <Card>
             <CardContent className="pt-6">
-              <h2 className="text-xl font-semibold mb-4">
-                Informations du client
-              </h2>
+              <h2 className="text-xl font-semibold mb-4">Informations du client</h2>
               <div className="space-y-4">
                 <div className="grid gap-2">
-                  <Label htmlFor="clientName">Nom du client</Label>
+                  <Label htmlFor="client-name">Nom du client</Label>
                   <Input
-                    id="clientName"
+                    id="client-name"
                     placeholder="Nom du client ou de l'entreprise"
-                    {...register("clientName")}
-                    aria-invalid={errors.clientName ? "true" : "false"}
+                    value={clientInfo.name}
+                    onChange={(e) => setClientInfo({ ...clientInfo, name: e.target.value })}
                   />
-                  {errors.clientName && (
-                    <p className="text-sm text-red-500">
-                      {errors.clientName.message}
-                    </p>
-                  )}
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="clientEmail">Email</Label>
+                  <Label htmlFor="client-email">Email</Label>
                   <Input
-                    id="clientEmail"
+                    id="client-email"
                     type="email"
                     placeholder="client@example.com"
-                    {...register("clientEmail")}
-                    aria-invalid={errors.clientEmail ? "true" : "false"}
+                    value={clientInfo.email}
+                    onChange={(e) => setClientInfo({ ...clientInfo, email: e.target.value })}
                   />
-                  {errors.clientEmail && (
-                    <p className="text-sm text-red-500">
-                      {errors.clientEmail.message}
-                    </p>
-                  )}
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="clientAddress">Adresse</Label>
+                  <Label htmlFor="client-address">Adresse</Label>
                   <Textarea
-                    id="clientAddress"
+                    id="client-address"
                     placeholder="Adresse complète"
-                    {...register("clientAddress")}
-                    aria-invalid={errors.clientAddress ? "true" : "false"}
+                    value={clientInfo.address}
+                    onChange={(e) => setClientInfo({ ...clientInfo, address: e.target.value })}
                   />
-                  {errors.clientAddress && (
-                    <p className="text-sm text-red-500">
-                      {errors.clientAddress.message}
-                    </p>
-                  )}
                 </div>
-                <div className="grid gap-2">
-                <Label htmlFor="clientPhone">Numéro de téléphone</Label>
-                <Input
-                  id="clientPhone"
-                  placeholder="XXXXXXXX"
-                  {...register('clientPhone')}
-                  aria-invalid={errors.clientPhone ? "true" : "false"}
-                />
-                {errors.clientPhone && (
-                  <p className="text-sm text-red-500">
-                    {errors.clientPhone.message}
-                  </p>
-                )}
-              </div>
               </div>
             </CardContent>
           </Card>
@@ -280,91 +197,50 @@ export function InvoiceForm() {
           <CardContent className="pt-6">
             <h2 className="text-xl font-semibold mb-4">Articles</h2>
 
-            {fields.map((field, index) => (
-              <div
-                key={field.id}
-                className="grid gap-4 p-4 border rounded-md mb-4"
-              >
+            {items.map((item, index) => (
+              <div key={index} className="grid gap-4 p-4 border rounded-md mb-4">
                 <div className="grid gap-2">
-                  <Label htmlFor={`items.${index}.description`}>
-                    Description
-                  </Label>
+                  <Label htmlFor={`item-description-${index}`}>Description</Label>
                   <Input
-                    id={`items.${index}.description`}
-                    {...register(`items.${index}.description`)}
+                    id={`item-description-${index}`}
+                    value={item.description}
+                    onChange={(e) => updateItem(index, "description", e.target.value)}
                     placeholder="Description de l'article ou du service"
-                    aria-invalid={
-                      errors.items?.[index]?.description ? "true" : "false"
-                    }
                   />
-                  {errors.items?.[index]?.description && (
-                    <p className="text-sm text-red-500">
-                      {errors.items[index]?.description?.message}
-                    </p>
-                  )}
                 </div>
                 <div className="grid grid-cols-3 gap-4">
                   <div className="grid gap-2">
-                    <Label htmlFor={`items.${index}.quantity`}>Quantité</Label>
+                    <Label htmlFor={`item-quantity-${index}`}>Quantité</Label>
                     <Input
-                      id={`items.${index}.quantity`}
+                      id={`item-quantity-${index}`}
                       type="number"
                       min="1"
-                      {...register(`items.${index}.quantity`, {
-                        valueAsNumber: true,
-                      })}
-                      aria-invalid={
-                        errors.items?.[index]?.quantity ? "true" : "false"
-                      }
+                      value={item.quantity}
+                      onChange={(e) => updateItem(index, "quantity", e.target.value)}
                     />
-                    {errors.items?.[index]?.quantity && (
-                      <p className="text-sm text-red-500">
-                        {errors.items[index]?.quantity?.message}
-                      </p>
-                    )}
                   </div>
                   <div className="grid gap-2">
-                    <Label htmlFor={`items.${index}.price`}>
-                      Prix unitaire (€)
-                    </Label>
+                    <Label htmlFor={`item-price-${index}`}>Prix unitaire (€)</Label>
                     <Input
-                      id={`items.${index}.price`}
+                      id={`item-price-${index}`}
                       type="number"
                       min="0"
                       step="0.01"
-                      {...register(`items.${index}.price`, {
-                        valueAsNumber: true,
-                      })}
-                      aria-invalid={
-                        errors.items?.[index]?.price ? "true" : "false"
-                      }
+                      value={item.price}
+                      onChange={(e) => updateItem(index, "price", e.target.value)}
                     />
-                    {errors.items?.[index]?.price && (
-                      <p className="text-sm text-red-500">
-                        {errors.items[index]?.price?.message}
-                      </p>
-                    )}
                   </div>
                   <div className="grid gap-2">
-                    <Label htmlFor={`items.${index}.total`}>Total (€)</Label>
-                    <Input
-                      id={`items.${index}.total`}
-                      type="number"
-                      value={(
-                        (items[index]?.quantity || 0) *
-                        (items[index]?.price || 0)
-                      ).toFixed(2)}
-                      disabled
-                    />
+                    <Label htmlFor={`item-total-${index}`}>Total (€)</Label>
+                    <Input id={`item-total-${index}`} type="number" value={item.total.toFixed(2)} disabled />
                   </div>
                 </div>
                 <Button
-                  type="button"
                   variant="outline"
                   size="icon"
                   className="ml-auto"
-                  onClick={() => handleRemoveItem(index)}
-                  disabled={fields.length === 1}
+                  onClick={() => removeItem(index)}
+                  disabled={items.length === 1}
                 >
                   <Trash2 className="h-4 w-4" />
                   <span className="sr-only">Supprimer l'article</span>
@@ -372,12 +248,7 @@ export function InvoiceForm() {
               </div>
             ))}
 
-            <Button
-              type="button"
-              variant="outline"
-              className="w-full mb-6"
-              onClick={handleAddItem}
-            >
+            <Button variant="outline" className="w-full mb-6" onClick={addItem}>
               <Plus className="mr-2 h-4 w-4" />
               Ajouter un article
             </Button>
@@ -401,11 +272,7 @@ export function InvoiceForm() {
             {/* Notes */}
             <div className="grid gap-2 mt-6">
               <Label htmlFor="notes">Notes</Label>
-              <Textarea
-                id="notes"
-                placeholder="Conditions de paiement, notes supplémentaires..."
-                {...register("notes")}
-              />
+              <Textarea id="notes" placeholder="Conditions de paiement, notes supplémentaires..." />
             </div>
           </CardContent>
         </Card>
@@ -413,28 +280,16 @@ export function InvoiceForm() {
         {/* Boutons d'action */}
         <div className="flex justify-end gap-4 mt-8">
           <Link href="/dashboard/invoices">
-            <Button type="button" variant="outline">
-              Annuler
-            </Button>
+            <Button variant="outline">Annuler</Button>
           </Link>
           <Button
-            type="submit"
-            className="bg-orange-400 text-black hover:bg-orange-500"
+            onClick={handleSubmit}
+            className="bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity"
           >
             Enregistrer la facture
           </Button>
         </div>
-      </form>
-
-      {/* Modal d'aperçu de la facture */}
-      {isPreviewOpen && invoiceData && (
-        <InvoicePreview
-        invoiceData={invoiceData}
-        isOpen={isPreviewOpen}
-        onClose={handleClosePreview}
-        onDownload={handleDownloadPDF}
-      />
-      )}
-    </FormProvider>
-  );
+      </main>
+    </div>
+  )
 }
