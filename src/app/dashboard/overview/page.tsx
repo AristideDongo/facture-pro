@@ -1,10 +1,15 @@
 import ActivitySummary from "@/components/layout/dashboard-component/overview/ActivitySummary";
-import StatCard from "@/components/layout/dashboard-component/overview/CardResume";
+import StatCard from "@/components/ui/CardResume";
+import { invoices } from "@/data/invoices";
+import { calculateInvoiceAmount } from "@/lib/calculeInvoiceAmount";
 import { formatFCFA } from "@/lib/format-money";
 import { CircleDollarSign, CreditCard, FilePlus, FileText } from "lucide-react";
 import React from "react";
 
 export default function page() {
+    const totalAmount = invoices.reduce((total, items) => {
+      return total + calculateInvoiceAmount(items.items);
+    }, 0);
   return (
     <div className="p-2 mt-7">
       <h1 className="text-xl font-semibold mb-3">Tableau de bord</h1>
@@ -23,7 +28,7 @@ export default function page() {
         />
         <StatCard
           title="Montant total facture"
-          value={formatFCFA(3200000)}
+          value={formatFCFA(totalAmount)}
           color="border-t-green-500"
           icon={<CircleDollarSign />}
         />

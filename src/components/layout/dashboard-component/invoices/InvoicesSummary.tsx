@@ -20,17 +20,17 @@ export default function InvoicesSummary({}) {
       </TabsContent>
       <TabsContent value="pending">
         {RenderListInvoiceSummary(
-          invoices.filter((inv) => inv.status === "pending")
+          invoices.filter((inv) => inv.invoiceDetails.status === "pending")
         )}
       </TabsContent>
       <TabsContent value="paid">
       {RenderListInvoiceSummary(
-          invoices.filter((inv) => inv.status === "paid")
+          invoices.filter((inv) => inv.invoiceDetails.status === "paid")
         )}
       </TabsContent>
       <TabsContent value="overdue">
       {RenderListInvoiceSummary(
-          invoices.filter((inv) => inv.status === "overdue")
+          invoices.filter((inv) => inv.invoiceDetails.status === "overdue")
         )}
       </TabsContent>
     </Tabs>
