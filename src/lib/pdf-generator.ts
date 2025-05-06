@@ -1,51 +1,42 @@
-import html2canvas from "html2canvas"
-import jsPDF from "jspdf"
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
-export async function generatePDF(element: HTMLElement, fileName: string): Promise<string> {
-  // Créer un canvas à partir de l'élément HTML
-  const canvas = await html2canvas(element, {
-    scale: 2, // Augmenter la qualité
-    useCORS: true, // Permettre le chargement d'images cross-origin
-    logging: false,
-    backgroundColor: "#FFFFFF", // Fond blanc
-  })
-
-  // Calculer les dimensions
-  const imgWidth = 210 // Largeur A4 en mm
-  const imgHeight = (canvas.height * imgWidth) / canvas.width
-  const pdf = new jsPDF("p", "mm", "a4")
-
-  // Ajouter l'image au PDF
-  const imgData = canvas.toDataURL("image/png")
-  pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight)
-
-  // Si la hauteur de l'image est supérieure à la hauteur de la page A4 (297mm)
-  let heightLeft = imgHeight
-  let position = 0
-  const pageHeight = 297 // Hauteur A4 en mm
-
-  // Si le contenu tient sur une seule page, simplement sauvegarder
-  if (heightLeft < pageHeight) {
-    pdf.save(fileName)
-    return fileName
+export const generatePDF = async (element: HTMLElement, filename: string) => {
+  if (!element) {
+    throw new Error("Élément DOM non trouvé");
   }
 
-  // Sinon, gérer les pages multiples
-  pdf.addPage()
-  heightLeft -= pageHeight
-  position = -pageHeight
+  try {
+    // Capture l'élément DOM comme image
+    const canvas = await html2canvas(element, {
+      scale: 2, // Meilleure qualité
+      useCORS: true,
+      logging: false,
+      allowTaint: true
+    });
 
-  while (heightLeft > 0) {
-    pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight)
-    heightLeft -= pageHeight
-    position -= pageHeight
-
-    if (heightLeft > 0) {
-      pdf.addPage()
-    }
+    const imgData = canvas.toDataURL('image/png');
+    
+    // Définir les dimensions du PDF (A4)
+    const pdf = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: 'a4'
+    });
+    
+    const imgWidth = 210; // A4 width in mm
+    const pageHeight = 297; // A4 height in mm
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    
+    // Ajouter l'image au PDF
+    pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+    
+    // Enregistrer le PDF
+    pdf.save(filename);
+    
+    return filename;
+  } catch (error) {
+    console.error("Erreur lors de la génération du PDF:", error);
+    throw error;
   }
-
-  // Sauvegarder le PDF
-  pdf.save(fileName)
-  return fileName
-}
+};

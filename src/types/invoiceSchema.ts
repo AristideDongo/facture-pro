@@ -19,7 +19,7 @@ export const companyInfoSchema = z.object({
   address: z.string().min(5, { message: "L'adresse doit contenir au moins 5 caractères" }),
   phone: z.string().min(10, { message: "Numéro de téléphone invalide" }),
   email: z.string().email({ message: "Email invalide" }),
-  website: z.string().url({ message: "URL invalide" }).optional().or(z.literal("")),
+  // website: z.string().url({ message: "URL invalide" }).optional().or(z.literal("")),
   // logo: z.string().optional(),
 })
 

@@ -21,7 +21,6 @@ export function CompanyInfoForm() {
       address: "",
       phone: "",
       email: "",
-      website: "",
     },
   })
 
@@ -110,7 +109,7 @@ export function CompanyInfoForm() {
             )}
           />
         </div>
-
+{/* 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <FormField
             control={form.control}
@@ -125,7 +124,7 @@ export function CompanyInfoForm() {
               </FormItem>
             )}
           />
-        </div>
+        </div> */}
 
         {/* <FormField
           control={form.control}

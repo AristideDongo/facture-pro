@@ -96,7 +96,7 @@ export function InvoicePreview() {
                 <p className="whitespace-pre-line">{companyInfo.address}</p>
                 <p>{companyInfo.phone}</p>
                 <p>{companyInfo.email}</p>
-                {companyInfo.website && <p>{companyInfo.website}</p>}
+                {/* {companyInfo.website && <p>{companyInfo.website}</p>} */}
               </div>
             </div>
 
