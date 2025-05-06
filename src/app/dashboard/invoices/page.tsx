@@ -16,8 +16,8 @@ export default function page() {
 
   return (
     <div className="p-2 mt-7">
-      <div className="flex justify-between">
-      <h1 className="text-xl font-semibold mb-3">Facture</h1>
+      <div className="flex mx-5 justify-between">
+      <h1 className="text-3xl font-semibold mb-3">Facture</h1>
       <Link href='/dashboard/invoices/new'>
       <Button className="flex bg-orange-400 text-black hover:bg-orange-500 cursor-pointer">
         <FilePlus className=""/>
