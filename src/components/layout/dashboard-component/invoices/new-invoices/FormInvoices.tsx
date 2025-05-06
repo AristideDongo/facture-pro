@@ -248,12 +248,12 @@ export function ItemsForm() {
                     <TableCell className="font-medium">{item.description || "-"}</TableCell>
                     <TableCell className="text-right">{item.quantity}</TableCell>
                     <TableCell className="text-right">
-                      {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(item.unitPrice)}
+                      {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "XOF" }).format(item.unitPrice)}
                     </TableCell>
                     <TableCell className="text-right">{item.taxRate}%</TableCell>
                     <TableCell className="text-right">{item.discount || 0}%</TableCell>
                     <TableCell className="text-right">
-                      {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
+                      {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "XOF" }).format(
                         calculateItemTotal(item),
                       )}
                     </TableCell>

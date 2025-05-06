@@ -92,10 +92,6 @@ export function InvoiceDetailsForm() {
                   </FormControl>
                   <SelectContent>
                   <SelectItem value="XOF">XOF (XOF)</SelectItem>
-                    <SelectItem value="EUR">Euro (€)</SelectItem>
-                    <SelectItem value="USD">Dollar US ($)</SelectItem>
-                    <SelectItem value="GBP">Livre Sterling (£)</SelectItem>
-                    <SelectItem value="CHF">Franc Suisse (CHF)</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />

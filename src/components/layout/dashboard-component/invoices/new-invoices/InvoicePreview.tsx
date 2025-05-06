@@ -76,7 +76,7 @@ export function InvoicePreview() {
               <p className="text-lg font-semibold mt-1">#{invoiceDetails.invoiceNumber}</p>
             </div>
 
-            {companyInfo.logo && (
+            {/* {companyInfo.logo && (
               <div className="flex justify-center md:justify-end">
                 <img
                   src={companyInfo.logo || "/placeholder.svg"}
@@ -84,13 +84,13 @@ export function InvoicePreview() {
                   className="h-16 object-contain"
                 />
               </div>
-            )}
+            )} */}
           </div>
 
           {/* Informations entreprise et client */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h2 className="font-semibold text-muted-foreground mb-2">DE</h2>
+              <h2 className="font-semibold text-muted-foreground mb-2">DE:</h2>
               <div className="space-y-1">
                 <p className="font-bold">{companyInfo.name}</p>
                 <p className="whitespace-pre-line">{companyInfo.address}</p>
@@ -100,8 +100,8 @@ export function InvoicePreview() {
               </div>
             </div>
 
-            <div>
-              <h2 className="font-semibold text-muted-foreground mb-2">POUR</h2>
+            <div className="">
+              <h2 className="font-semibold text-muted-foreground mb-2">POUR:</h2>
               <div className="space-y-1">
                 <p className="font-bold">{clientInfo.name}</p>
                 <p className="whitespace-pre-line">{clientInfo.address}</p>
@@ -112,7 +112,7 @@ export function InvoicePreview() {
           </div>
 
           {/* Dates et informations de paiement */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-muted/50 p-4 rounded-lg">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-orange-100 p-4 rounded-lg">
             <div>
               <p className="text-sm text-muted-foreground">Date d'émission</p>
               <p className="font-medium">
@@ -137,7 +137,7 @@ export function InvoicePreview() {
           <div>
             <Table>
               <TableHeader>
-                <TableRow>
+                <TableRow className="bg-orange-200">
                   <TableHead className="w-[40%]">Description</TableHead>
                   <TableHead className="text-right">Quantité</TableHead>
                   <TableHead className="text-right">Prix unitaire</TableHead>
@@ -171,7 +171,7 @@ export function InvoicePreview() {
               <span className="text-muted-foreground">TVA:</span>
               <span className="font-medium">{formatCurrency(calculateTotalTax())}</span>
             </div>
-            <Separator className="my-2 w-full max-w-xs" />
+            <Separator className="my-2 w-full bg-orange-500 max-w-xs" />
             <div className="flex justify-between w-full max-w-xs text-lg font-bold">
               <span>Total:</span>
               <span>{formatCurrency(calculateTotal())}</span>
@@ -198,7 +198,7 @@ export function InvoicePreview() {
           )}
 
           {/* Pied de page */}
-          <div className="text-center text-sm text-muted-foreground mt-8">
+          <div className="text-center text-black text-sm mt-8">
             <p>Merci pour votre confiance !</p>
           </div>
         </div>

@@ -22,7 +22,6 @@ export function CompanyInfoForm() {
       phone: "",
       email: "",
       website: "",
-      logo: "",
     },
   })
 
@@ -128,7 +127,7 @@ export function CompanyInfoForm() {
           />
         </div>
 
-        <FormField
+        {/* <FormField
           control={form.control}
           name="logo"
           render={({ field }) => (
@@ -140,7 +139,7 @@ export function CompanyInfoForm() {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
       </form>
     </Form>
   )

@@ -20,7 +20,7 @@ export const companyInfoSchema = z.object({
   phone: z.string().min(10, { message: "Numéro de téléphone invalide" }),
   email: z.string().email({ message: "Email invalide" }),
   website: z.string().url({ message: "URL invalide" }).optional().or(z.literal("")),
-  logo: z.string().optional(),
+  // logo: z.string().optional(),
 })
 
 export type CompanyInfoValues = z.infer<typeof companyInfoSchema>

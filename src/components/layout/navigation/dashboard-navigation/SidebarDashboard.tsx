@@ -50,7 +50,7 @@ export default function SidebarDashboard({ className = '' }: SidebarProps) {
 
       <aside 
         className={`
-          fixed md:relative z-50
+          fixed md:relative z-50 overflow-hidden
           h-full bg-gradient-to-b from-orange-600 to-red-500 text-white
           transition-all duration-300 ease-in-out
           ${isOpen ? 'w-64' : 'w-0 md:w-16'} 
