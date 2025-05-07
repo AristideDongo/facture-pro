@@ -1,6 +1,7 @@
 import ActivitySummary from "@/components/layout/dashboard-component/overview/ActivitySummary";
 import StatCard from "@/components/ui/CardResume";
 import { invoices } from "@/data/invoices";
+import { quote } from "@/data/quotes";
 import { calculateAmount } from "@/lib/calculeAmount";
 import { formatFCFA } from "@/lib/format";
 import { CircleDollarSign, CreditCard, FilePlus, FileText } from "lucide-react";
@@ -10,6 +11,15 @@ export default function page() {
     const totalAmount = invoices.reduce((total, items) => {
       return total + calculateAmount(items.items);
     }, 0);
+
+    const totalsAmount = quote.reduce((total, items) => {
+        const { services, taxRate } = items.quoteDetailsSchema
+        const servicesWithTaxRate = services.map(service => ({
+          ...service,
+          taxRate
+        }))
+          return total + calculateAmount(servicesWithTaxRate);
+        }, 0);
   return (
     <div className="p-2 mt-7">
       <h1 className="text-3xl font-semibold mb-3">Tableau de bord</h1>
@@ -34,7 +44,7 @@ export default function page() {
         />
         <StatCard
           title="Montant total devis"
-          value={formatFCFA(700000)}
+          value={formatFCFA(totalsAmount)}
           color="border-t-orange-500"
           icon={<CreditCard />}
         />

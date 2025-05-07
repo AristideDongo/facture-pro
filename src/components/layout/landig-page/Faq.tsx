@@ -15,7 +15,7 @@ export default function Faq() {
         <div className="grid grid-cols-1 mt-12 md:mt-20 md:grid-cols-2 gap-y-16 gap-x-20">
           <div className="flex items-start">
             <div className="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-gray-700 rounded-full">
-              <span className="text-lg font-semibold text-white">?</span>
+              <span className="text-lg font-semibold text-orange-600">?</span>
             </div>
             <div className="ml-4">
               <p className="text-xl font-semibold text-white">Comment créer une facture ?</p>
@@ -27,7 +27,7 @@ export default function Faq() {
 
           <div className="flex items-start">
             <div className="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-gray-700 rounded-full">
-              <span className="text-lg font-semibold text-white">?</span>
+              <span className="text-lg font-semibold text-orange-600">?</span>
             </div>
             <div className="ml-4">
               <p className="text-xl font-semibold text-white">Puis-je envoyer une facture directement à mon client ?</p>
@@ -39,7 +39,7 @@ export default function Faq() {
 
           <div className="flex items-start">
             <div className="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-gray-700 rounded-full">
-              <span className="text-lg font-semibold text-white">?</span>
+              <span className="text-lg font-semibold text-orange-600">?</span>
             </div>
             <div className="ml-4">
               <p className="text-xl font-semibold text-white">Est-ce que mes données sont sécurisées ?</p>
@@ -51,7 +51,7 @@ export default function Faq() {
 
           <div className="flex items-start">
             <div className="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-gray-700 rounded-full">
-              <span className="text-lg font-semibold text-white">?</span>
+              <span className="text-lg font-semibold text-orange-600">?</span>
             </div>
             <div className="ml-4">
               <p className="text-xl font-semibold text-white">Le service est-il gratuit ?</p>
