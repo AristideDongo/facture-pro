@@ -1,5 +1,3 @@
-// store/invoiceStore.ts
-
 import { create } from 'zustand';
 import { ItemValues, ClientInfoValues, CompanyInfoValues, InvoiceValues } from '@/types/invoiceSchema';
 
