@@ -9,13 +9,13 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useInvoiceStore } from "@/hooks/invoices/useInvoiceForm"
-import { companyInfoSchema, CompanyInfoValues } from "@/types/invoiceSchema"
+import { fullInvoiceSchema, InvoiceValues } from "@/types/invoiceSchema"
 
 export function CompanyInfoForm() {
   const { companyInfo, setCompanyInfo, setCompanyInfoValid } = useInvoiceStore()
 
-  const form = useForm<CompanyInfoValues>({
-    resolver: zodResolver(companyInfoSchema),
+  const form = useForm<InvoiceValues>({
+    resolver: zodResolver(fullInvoiceSchema),
     defaultValues: companyInfo || {
       name: "",
       address: "",
@@ -54,7 +54,7 @@ export function CompanyInfoForm() {
 
         <FormField
           control={form.control}
-          name="name"
+          name='companyInfo.name'
           render={({ field }) => (
             <FormItem>
               <FormLabel>Nom de l'entreprise *</FormLabel>
@@ -68,7 +68,7 @@ export function CompanyInfoForm() {
 
         <FormField
           control={form.control}
-          name="address"
+          name='companyInfo.address'
           render={({ field }) => (
             <FormItem>
               <FormLabel>Adresse *</FormLabel>
@@ -83,7 +83,7 @@ export function CompanyInfoForm() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <FormField
             control={form.control}
-            name="phone"
+            name='companyInfo.phone'
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Téléphone *</FormLabel>
@@ -97,7 +97,7 @@ export function CompanyInfoForm() {
 
           <FormField
             control={form.control}
-            name="email"
+            name='companyInfo.email'
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Email *</FormLabel>

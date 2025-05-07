@@ -1,9 +1,45 @@
-import React from 'react'
+import React from "react";
+import { Button } from '@/components/ui/button';
+import { CreditCard, FilePlus } from "lucide-react";
+import Link from "next/link";
+import StatCard from "@/components/ui/CardResume";
+import { formatFCFA } from "@/lib/format";
+import QuoteSummary from "@/components/layout/dashboard-component/quotes/quote-summary/QuoteSummary";
+import { quote } from "@/data/quotes";
+import { calculateInvoiceAmount } from "@/lib/calculeAmount";
 
-type Props = {}
+export default function page() {
 
-export default function page({}: Props) {
+  const totalAmount = quote.reduce((total, items) => {
+      return total + calculateInvoiceAmount(items.quoteDetailsSchema.services);
+    }, 0);
+
   return (
-    <div>page</div>
-  )
+    <div className="p-2 mt-7">
+      <div className="flex mx-5 justify-between">
+      <h1 className="text-3xl font-semibold mb-3">Dévis</h1>
+      <Link href='/dashboard/quotes/new'>
+      <Button className="flex bg-orange-400 text-black hover:bg-orange-500 cursor-pointer">
+        <FilePlus className=""/>
+        Nouveau Devis
+      </Button>
+      </Link>
+      </div>
+      <div className="flex justify-center items-center gap-2">
+      <StatCard
+          title="Devis totaux"
+          value="1 500"
+          color="border-t-yellow-500"
+          icon={<FilePlus />}
+        />
+        <StatCard
+          title="Montant total devis"
+          value={formatFCFA(totalAmount)}
+          color="border-t-orange-500"
+          icon={<CreditCard />}
+        />
+      </div>
+      <QuoteSummary/>
+    </div>
+  );
 }

@@ -13,9 +13,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useInvoiceStore } from "@/hooks/invoices/useInvoiceForm";
-import { ItemValues } from "./FormInvoices";
-import { formatFCFA } from "@/lib/format-money";
+import { formatFCFA } from "@/lib/format";
 import { wrapText } from "@/lib/wrapText";
+import { ItemValues } from "@/types/invoiceSchema";
 
 export function InvoicePreview() {
   const { clientInfo, companyInfo, items, invoiceDetails } = useInvoiceStore();

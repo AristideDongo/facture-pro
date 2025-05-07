@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import RenderListInvoiceSummary from "./RenderListInvoicesSummary";
 import { invoices } from "@/data/invoices";
+import RenderListInvoiceSummary from "./RenderListInvoicesSummary";
 
-export default function InvoicesSummary({}) {
+export default function InvoicesSummary() {
   return (
     <Tabs defaultValue="all" className="mt-8">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
@@ -15,23 +15,31 @@ export default function InvoicesSummary({}) {
           <TabsTrigger value="overdue">En retard</TabsTrigger>
         </TabsList>
       </div>
+
+      {/* All invoices */}
       <TabsContent value="all">
-        {RenderListInvoiceSummary(invoices)}
+        <RenderListInvoiceSummary filteredInvoiceSummary={invoices} />
       </TabsContent>
+
+      {/* Pending invoices */}
       <TabsContent value="pending">
-        {RenderListInvoiceSummary(
-          invoices.filter((inv) => inv.invoiceDetails.status === "pending")
-        )}
+        <RenderListInvoiceSummary
+          filteredInvoiceSummary={invoices.filter((inv) => inv.invoiceDetails.status === "pending")}
+        />
       </TabsContent>
+
+      {/* Paid invoices */}
       <TabsContent value="paid">
-      {RenderListInvoiceSummary(
-          invoices.filter((inv) => inv.invoiceDetails.status === "paid")
-        )}
+        <RenderListInvoiceSummary
+          filteredInvoiceSummary={invoices.filter((inv) => inv.invoiceDetails.status === "paid")}
+        />
       </TabsContent>
+
+      {/* Overdue invoices */}
       <TabsContent value="overdue">
-      {RenderListInvoiceSummary(
-          invoices.filter((inv) => inv.invoiceDetails.status === "overdue")
-        )}
+        <RenderListInvoiceSummary
+          filteredInvoiceSummary={invoices.filter((inv) => inv.invoiceDetails.status === "overdue")}
+        />
       </TabsContent>
     </Tabs>
   );

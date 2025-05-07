@@ -1,13 +1,17 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { invoices } from '@/data/invoices';
 import { getStatus } from '@/lib/getSatus';
+import { InvoiceValues } from '@/types/invoiceSchema';
 import { Eye, FileEdit, MoreVertical, Trash2 } from 'lucide-react';
 import React from 'react';
 
-export default function RenderListInvoiceSummary(fliteredInvoiceSummary: typeof invoices) {
-  if (fliteredInvoiceSummary.length === 0) {
+interface props {
+  filteredInvoiceSummary: InvoiceValues[]
+}
+
+export default function RenderListInvoiceSummary({filteredInvoiceSummary}: props) {
+  if (filteredInvoiceSummary.length === 0) {
     return (
       <div className="text-center py-10">
         <p className="text-muted-foreground">Aucune facture disponible</p>
@@ -17,7 +21,7 @@ export default function RenderListInvoiceSummary(fliteredInvoiceSummary: typeof 
 
   return (
     <div className="space-y-4">
-      {fliteredInvoiceSummary.map((invoice, i) => (
+      {filteredInvoiceSummary.map((invoice, i) => (
         <Card key={i} className="rounded-lg border p-6 invoice-card">
           <div className="flex justify-between items-start">
             
@@ -30,7 +34,7 @@ export default function RenderListInvoiceSummary(fliteredInvoiceSummary: typeof 
               <CardContent className="p-0 text-right">
                 <div className="font-medium">{invoice.amount.toFixed(2)} Fcfa</div>
                 <div className="text-sm text-muted-foreground">
-                  Échéance: <span>{invoice.invoiceDetails.dueDate}</span>
+                  Échéance: <span>{invoice.invoiceDetails.dueDate.toLocaleDateString()}</span>
                 </div>
                 <div className='text-center'>{invoice.invoiceDetails.status !== 'quote' && getStatus(invoice.invoiceDetails.status)}</div>
               </CardContent>

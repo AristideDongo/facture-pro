@@ -13,25 +13,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Card, CardContent } from "@/components/ui/card"
 import { useInvoiceStore } from "@/hooks/invoices/useInvoiceForm"
-import { formatFCFA } from "@/lib/format-money"
-
-// Schéma de validation pour un article
-const itemSchema = z.object({
-  description: z.string().min(2, { message: "La description doit contenir au moins 2 caractères" }),
-  quantity: z.coerce.number().positive({ message: "La quantité doit être positive" }),
-  unitPrice: z.coerce.number().positive({ message: "Le prix unitaire doit être positif" }),
-  taxRate: z.coerce.number().min(0, { message: "Le taux de TVA ne peut pas être négatif" }),
-  discount: z.coerce.number().min(0, { message: "La remise ne peut pas être négative" }).optional(),
-  notes: z.string().optional(),
-})
-
-// Schéma de validation pour la liste d'articles
-export const itemsSchema = z.object({
-  items: z.array(itemSchema).min(1, { message: "Au moins un article est requis" }),
-})
-
-export type ItemValues = z.infer<typeof itemSchema>
-export type ItemsValues = z.infer<typeof itemsSchema>
+import { formatFCFA } from "@/lib/format"
+import { itemsSchema, ItemsValues, ItemValues } from "@/types/invoiceSchema"
 
 export function ItemsForm() {
   const { items, setItems, setItemsValid } = useInvoiceStore()

@@ -1,12 +1,12 @@
-import InvoicesSummary from "@/components/layout/dashboard-component/invoices/InvoicesSummary";
 import React from "react";
 import { Button } from '@/components/ui/button';
 import { CircleDollarSign, FilePlus, FileText } from "lucide-react";
 import Link from "next/link";
 import StatCard from "@/components/ui/CardResume";
-import { formatFCFA } from "@/lib/format-money";
-import { calculateInvoiceAmount } from "@/lib/calculeInvoiceAmount";
+import { formatFCFA } from "@/lib/format";
+import { calculateInvoiceAmount } from "@/lib/calculeAmount";
 import { invoices } from "@/data/invoices";
+import InvoicesSummary from "@/components/layout/dashboard-component/invoices/invoice-summary/InvoicesSummary";
 
 export default function page() {
 

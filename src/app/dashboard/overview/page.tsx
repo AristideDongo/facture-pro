@@ -1,8 +1,8 @@
 import ActivitySummary from "@/components/layout/dashboard-component/overview/ActivitySummary";
 import StatCard from "@/components/ui/CardResume";
 import { invoices } from "@/data/invoices";
-import { calculateInvoiceAmount } from "@/lib/calculeInvoiceAmount";
-import { formatFCFA } from "@/lib/format-money";
+import { calculateInvoiceAmount } from "@/lib/calculeAmount";
+import { formatFCFA } from "@/lib/format";
 import { CircleDollarSign, CreditCard, FilePlus, FileText } from "lucide-react";
 import React from "react";
 
