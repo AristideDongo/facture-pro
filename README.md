@@ -36,9 +36,10 @@ Application web construite avec **Next.js** et **pnpm** permettant de créer, g�
 - **Framework** : [Next.js](https://nextjs.org/)
 - **Langage** : TypeScript
 - **Package Manager** : [pnpm](https://pnpm.io/)
-- **Formulaires** : `react-hook-form` + `zod`
+- **Form** : `react-hook-form` + `zod`
 - **PDF** : (Pas encore déterminé.)
 - **i18n** : `i18n-iso-countries` pour la sélection des pays
+- **State Management**: `zustand`
 
 ---
 
