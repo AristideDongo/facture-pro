@@ -31,7 +31,7 @@ export default function Hero() {
       subtitleControls.start({ opacity: 0, y: 20 })
       buttonControls.start({ opacity: 0, y: 20 })
     }
-  }, [inView])
+  }, [inView, ref, titleControls, highlightControls, subtitleControls, buttonControls])
 
   return (
     <div 

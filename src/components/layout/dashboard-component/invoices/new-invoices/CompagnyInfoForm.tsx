@@ -2,20 +2,19 @@
 
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
 import { useEffect } from "react"
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useInvoiceStore } from "@/hooks/invoices/useInvoiceForm"
-import { fullInvoiceSchema, InvoiceValues } from "@/types/invoiceSchema"
+import { companyInfoSchema, CompanyInfoValues } from "@/types/invoiceSchema"
 
 export function CompanyInfoForm() {
   const { companyInfo, setCompanyInfo, setCompanyInfoValid } = useInvoiceStore()
 
-  const form = useForm<InvoiceValues>({
-    resolver: zodResolver(fullInvoiceSchema),
+  const form = useForm<CompanyInfoValues>({
+    resolver: zodResolver(companyInfoSchema),
     defaultValues: companyInfo || {
       name: "",
       address: "",
@@ -54,10 +53,10 @@ export function CompanyInfoForm() {
 
         <FormField
           control={form.control}
-          name='companyInfo.name'
+          name='name'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nom de l'entreprise *</FormLabel>
+              <FormLabel>Nom de l&apos;entreprise *</FormLabel>
               <FormControl>
                 <Input placeholder="Nom de votre entreprise" {...field} />
               </FormControl>
@@ -68,7 +67,7 @@ export function CompanyInfoForm() {
 
         <FormField
           control={form.control}
-          name='companyInfo.address'
+          name='address'
           render={({ field }) => (
             <FormItem>
               <FormLabel>Adresse *</FormLabel>
@@ -83,7 +82,7 @@ export function CompanyInfoForm() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <FormField
             control={form.control}
-            name='companyInfo.phone'
+            name='phone'
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Téléphone *</FormLabel>
@@ -97,7 +96,7 @@ export function CompanyInfoForm() {
 
           <FormField
             control={form.control}
-            name='companyInfo.email'
+            name='email'
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Email *</FormLabel>

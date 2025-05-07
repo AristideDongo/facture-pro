@@ -62,7 +62,7 @@ export function DevisForm({ defaultValues, onSubmit }: DevisFormProps) {
       >
         {/* Informations de l'entreprise */}
         <div className="space-y-4">
-          <h3 className="font-medium">Informations de l'entreprise</h3>
+          <h3 className="font-medium">Informations de l&apos;entreprise</h3>
 
           <div className="grid grid-cols-1 gap-4">
             <FormField
@@ -70,7 +70,7 @@ export function DevisForm({ defaultValues, onSubmit }: DevisFormProps) {
               name="compagnyQuoteInfo.companyName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nom de l'entreprise</FormLabel>
+                  <FormLabel>Nom de l&apos;entreprise</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -218,7 +218,7 @@ export function DevisForm({ defaultValues, onSubmit }: DevisFormProps) {
               name="quoteDetailsSchema.quoteDate"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Date d'émission</FormLabel>
+                  <FormLabel>Date démission</FormLabel>
                   <FormControl>
                     <Input {...field} type="date" />
                   </FormControl>

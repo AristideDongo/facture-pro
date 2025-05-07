@@ -1,14 +1,14 @@
 import ActivitySummary from "@/components/layout/dashboard-component/overview/ActivitySummary";
 import StatCard from "@/components/ui/CardResume";
 import { invoices } from "@/data/invoices";
-import { calculateInvoiceAmount } from "@/lib/calculeAmount";
+import { calculateAmount } from "@/lib/calculeAmount";
 import { formatFCFA } from "@/lib/format";
 import { CircleDollarSign, CreditCard, FilePlus, FileText } from "lucide-react";
 import React from "react";
 
 export default function page() {
     const totalAmount = invoices.reduce((total, items) => {
-      return total + calculateInvoiceAmount(items.items);
+      return total + calculateAmount(items.items);
     }, 0);
   return (
     <div className="p-2 mt-7">

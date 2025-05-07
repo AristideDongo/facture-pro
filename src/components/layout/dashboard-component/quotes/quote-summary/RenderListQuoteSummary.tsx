@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { getStatus } from '@/lib/getSatus';
+// import { getStatus } from '@/lib/getSatus';
 import { DevisInfo } from '@/types/quoteSchema';
 import { Eye, FileEdit, MoreVertical, Trash2 } from 'lucide-react';
 import React from 'react';

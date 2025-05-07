@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react';
-import { Menu, X, Home, Settings, User, FileText, HelpCircle, ChevronRight, ChevronLeft, FilePlus } from 'lucide-react';
+import { Menu, Home, Settings, User, FileText, HelpCircle, ChevronRight, ChevronLeft, FilePlus } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 

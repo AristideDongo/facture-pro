@@ -20,7 +20,7 @@ export default function Faq() {
             <div className="ml-4">
               <p className="text-xl font-semibold text-white">Comment créer une facture ?</p>
               <p className="mt-4 text-base text-gray-100">
-                Il vous suffit de remplir les champs du formulaire (client, produits, prix) et de cliquer sur "Générer la facture".
+                Il vous suffit de remplir les champs du formulaire (client, produits, prix) et de cliquer sur Générer la facture.
               </p>
             </div>
           </div>

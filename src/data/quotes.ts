@@ -4,8 +4,9 @@ export const quote = [
       quoteNumber: "DEV-001",
       quoteDate: "2025-05-01",
       expirationDate: "2025-06-01",
+      taxRate: 0,
       services: [
-        { description: "Site Web", quantity: 1, unitPrice: 100000, taxRate: 0}
+        { description: "Site Web", quantity: 1, unitPrice: 100000}
       ],
       paymentTerms: "30 jours",
     },

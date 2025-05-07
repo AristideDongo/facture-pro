@@ -1,7 +1,6 @@
 import CallToAction from '@/components/common/CallToAction';
 import React from 'react'
 import { navLink } from './navlinks';
-import clsx from 'clsx';
 import { Fade as Hamburger } from 'hamburger-react'
 import { Button } from '@/components/ui/button';
 import { AnimatePresence, motion } from 'framer-motion';

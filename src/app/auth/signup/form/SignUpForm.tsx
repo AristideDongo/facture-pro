@@ -97,6 +97,8 @@ export function SignupForm({
   const onSubmit = async (data: SignupFormValues) => {
     setServerError(null);
     setSuccess(false);
+    console.log(data);
+    
 
     try {
       setSuccess(true);
@@ -253,12 +255,12 @@ export function SignupForm({
                     }
                   />
                   <Label htmlFor="acceptTerms" className="text-sm font-normal">
-                    J'accepte les
+                    J&apos;accepte les
                     <Link
                       href="#"
                       className="text-orange-600 hover:underline underline-offset-4"
                     >
-                      conditions d'utilisation
+                      conditions d&apos;utilisation
                     </Link>
                     et la
                     <Link

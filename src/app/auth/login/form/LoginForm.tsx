@@ -53,7 +53,7 @@ export function LoginForm({
 
   const onSubmit = async (data: LoginFormValues) => {
     setServerError(null);
-
+    console.log(data)
     try {
     } catch (error) {
       if (error instanceof Error) {

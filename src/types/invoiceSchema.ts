@@ -34,7 +34,6 @@ export const fullInvoiceSchema = z.object({
   amount: z.number().min(0, { message: "Le montant ne peut pas être négatif" }),
 })
 
-export type InvoiceValues = z.infer<typeof fullInvoiceSchema>
 
 // Schéma de validation pour un article
 export const itemSchema = z.object({
@@ -50,6 +49,11 @@ export const itemSchema = z.object({
 export const itemsSchema = z.object({
   items: z.array(itemSchema).min(1, { message: "Au moins un article est requis" }),
 })
+
+export type ClientInfoValues = z.infer<typeof clientInfoSchema>
+export type CompanyInfoValues = z.infer<typeof companyInfoSchema>
+export type InvoiceDetailsValues = z.infer<typeof invoiceDetailsSchema>
+export type InvoiceValues = z.infer<typeof fullInvoiceSchema>
 
 export type ItemValues = z.infer<typeof itemSchema>
 export type ItemsValues = z.infer<typeof itemsSchema>

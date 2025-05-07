@@ -6,7 +6,7 @@ export type Item = {
     taxRate: number // en pourcentage
   }
   
-  export function calculateInvoiceAmount(items: Item[]): number {
+  export function calculateAmount(items: Item[]): number {
     if (!items || items.length === 0) return 0
   
     return items.reduce((total, item) => {

@@ -25,7 +25,7 @@ export const generatePDF = async (element: HTMLElement, filename: string) => {
     });
     
     const imgWidth = 210; // A4 width in mm
-    const pageHeight = 297; // A4 height in mm
+    // const pageHeight = 297; // A4 height in mm
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
     
     // Ajouter l'image au PDF

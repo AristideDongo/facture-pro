@@ -75,6 +75,8 @@ export function ResetPasswordForm({
   const onSubmit = async (data: ResetPasswordFormValues) => {
     setServerError(null);
     setIsSuccess(false);
+    console.log(data);
+    
 
     try {
       setIsSuccess(true);
@@ -103,7 +105,7 @@ export function ResetPasswordForm({
           {isSuccess ? (
             <Alert className="bg-green-50 border-green-200 text-green-800">
               <AlertDescription>
-                Un email de réinitialisation a été envoyé à l'adresse indiquée.
+                Un email de réinitialisation a été envoyé à l&apos;adresse indiquée.
                 Veuillez vérifier votre boîte de réception et suivre les
                 instructions.
               </AlertDescription>

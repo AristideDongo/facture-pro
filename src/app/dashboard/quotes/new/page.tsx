@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeftCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-export default function page() {
+export default function Page() {
   const router = useRouter()
   return (
     <main className="container mx-auto py-10 px-4">

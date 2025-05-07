@@ -19,21 +19,38 @@ import { useInvoiceStore } from "@/hooks/invoices/useInvoiceForm"
 import { fullInvoiceSchema, InvoiceValues } from "@/types/invoiceSchema"
 
 export function InvoiceDetailsForm() {
-  const { invoiceDetails, setInvoiceDetails, setInvoiceDetailsValid } = useInvoiceStore()
+  const { setInvoiceDetails, setInvoiceDetailsValid } = useInvoiceStore()
 
   const form = useForm<InvoiceValues>({
     resolver: zodResolver(fullInvoiceSchema),
-    defaultValues: invoiceDetails || {
-      invoiceNumber: `INV-${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, "0")}-${String(Math.floor(Math.random() * 1000)).padStart(3, "0")}`,
-      issueDate: new Date(),
-      dueDate: new Date(new Date().setDate(new Date().getDate() + 30)),
-      paymentTerms: "30 jours",
-      paymentMethod: "Virement bancaire",
-      notes: "",
-      terms: "Paiement à réception de la facture. Tout retard de paiement entraînera des pénalités.",
-      currency: "XOF",
+    defaultValues: {
+      invoiceDetails: {
+        invoiceNumber: `INV-${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, "0")}-${String(Math.floor(Math.random() * 1000)).padStart(3, "0")}`,
+        issueDate: new Date(),
+        dueDate: new Date(new Date().setDate(new Date().getDate() + 30)),
+        status: "payé",
+        currency: "XOF",
+        paymentTerms: "30 jours",
+        paymentMethod: "Virement bancaire",
+        notes: "",
+        terms: "Paiement à réception de la facture. Tout retard de paiement entraînera des pénalités.",
+      },
+      companyInfo: {
+        name: "",
+        address: "",
+        phone: "",
+        email: "",
+      },
+      clientInfo: {
+        name: "",
+        email: "",
+        address: "",
+        phone: "",
+      },
+      amount: 0,
     },
   })
+  
 
   const { formState } = form
 
@@ -106,7 +123,7 @@ export function InvoiceDetailsForm() {
             name='invoiceDetails.issueDate'
             render={({ field }) => (
               <FormItem className="flex flex-col">
-                <FormLabel>Date d'émission *</FormLabel>
+                <FormLabel>Date d&apos;émission *</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
@@ -133,7 +150,7 @@ export function InvoiceDetailsForm() {
             name='invoiceDetails.dueDate'
             render={({ field }) => (
               <FormItem className="flex flex-col">
-                <FormLabel>Date d'échéance *</FormLabel>
+                <FormLabel>Date d&apos;échéance *</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>

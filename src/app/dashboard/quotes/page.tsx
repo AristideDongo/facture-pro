@@ -6,12 +6,17 @@ import StatCard from "@/components/ui/CardResume";
 import { formatFCFA } from "@/lib/format";
 import QuoteSummary from "@/components/layout/dashboard-component/quotes/quote-summary/QuoteSummary";
 import { quote } from "@/data/quotes";
-import { calculateInvoiceAmount } from "@/lib/calculeAmount";
+import { calculateAmount } from "@/lib/calculeAmount";
 
 export default function page() {
 
   const totalAmount = quote.reduce((total, items) => {
-      return total + calculateInvoiceAmount(items.quoteDetailsSchema.services);
+    const { services, taxRate } = items.quoteDetailsSchema
+    const servicesWithTaxRate = services.map(service => ({
+      ...service,
+      taxRate
+    }))
+      return total + calculateAmount(servicesWithTaxRate);
     }, 0);
 
   return (

@@ -91,7 +91,7 @@ export function DevisActions({ devisInfo, resetDevis }: DevisActionsProps) {
       </div>
 
       <div className="text-sm text-muted-foreground mt-2">
-        <p>Pour générer le PDF, remplissez le formulaire et cliquez sur le bouton "Générer le PDF".</p>
+        <p>Pour générer le PDF, remplissez le formulaire et cliquez sur le bouton Générer le PDF.</p>
       </div>
     </div>
   )

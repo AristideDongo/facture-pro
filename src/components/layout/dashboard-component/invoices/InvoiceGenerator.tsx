@@ -80,7 +80,7 @@ export function InvoiceGenerator() {
       // Générer le PDF
       const fileName = await generatePDF(
         invoiceRef.current,
-        `Facture_${invoiceDetails?.invoiceNumber || "Sans_Numéro"}.pdf`,
+        `Facture_${invoiceDetails?.invoiceDetails.invoiceNumber || "Sans_Numéro"}.pdf`,
       )
 
       toast.success('Facture générée',{

@@ -4,14 +4,14 @@ import { CircleDollarSign, FilePlus, FileText } from "lucide-react";
 import Link from "next/link";
 import StatCard from "@/components/ui/CardResume";
 import { formatFCFA } from "@/lib/format";
-import { calculateInvoiceAmount } from "@/lib/calculeAmount";
 import { invoices } from "@/data/invoices";
 import InvoicesSummary from "@/components/layout/dashboard-component/invoices/invoice-summary/InvoicesSummary";
+import { calculateAmount } from "@/lib/calculeAmount";
 
 export default function page() {
 
   const totalAmount = invoices.reduce((total, items) => {
-    return total + calculateInvoiceAmount(items.items);
+    return total + calculateAmount(items.items);
   }, 0);
 
   return (

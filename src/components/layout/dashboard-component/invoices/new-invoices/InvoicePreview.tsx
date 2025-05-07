@@ -61,7 +61,7 @@ export function InvoicePreview() {
   if (!clientInfo || !companyInfo || !items || !invoiceDetails) {
     return (
       <div className="text-center p-6 text-muted-foreground">
-        Remplissez les formulaires pour voir l'aperçu de la facture
+        Remplissez les formulaires pour voir l&apos;aperçu de la facture
       </div>
     );
   }
@@ -77,7 +77,7 @@ export function InvoicePreview() {
             <div>
               <h1 className="text-2xl font-bold">FACTURE</h1>
               <p className="text-lg font-semibold mt-1">
-                #{invoiceDetails.invoiceNumber}
+                #{invoiceDetails.invoiceDetails.invoiceNumber}
               </p>
             </div>
 
@@ -121,10 +121,10 @@ export function InvoicePreview() {
           {/* Dates et informations de paiement */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-orange-100 p-4 rounded-lg">
             <div>
-              <p className="text-sm text-muted-foreground">Date d'émission</p>
+              <p className="text-sm text-muted-foreground">Date d&apos;émission</p>
               <p className="font-medium">
-                {invoiceDetails.issueDate
-                  ? format(invoiceDetails.issueDate, "dd MMMM yyyy", {
+                {invoiceDetails.invoiceDetails.issueDate
+                  ? format(invoiceDetails.invoiceDetails.issueDate, "dd MMMM yyyy", {
                       locale: fr,
                     })
                   : "-"}
@@ -132,10 +132,10 @@ export function InvoicePreview() {
             </div>
 
             <div>
-              <p className="text-sm text-muted-foreground">Date d'échéance</p>
+              <p className="text-sm text-muted-foreground">Date d&apos;échéance</p>
               <p className="font-medium">
-                {invoiceDetails.dueDate
-                  ? format(invoiceDetails.dueDate, "dd MMMM yyyy", {
+                {invoiceDetails.invoiceDetails.dueDate
+                  ? format(invoiceDetails.invoiceDetails.dueDate, "dd MMMM yyyy", {
                       locale: fr,
                     })
                   : "-"}
@@ -147,7 +147,7 @@ export function InvoicePreview() {
                 Méthode de paiement
               </p>
               <p className="font-medium">
-                {invoiceDetails.paymentMethod || "-"}
+                {invoiceDetails.invoiceDetails.paymentMethod || "-"}
               </p>
             </div>
           </div>
@@ -218,22 +218,22 @@ export function InvoicePreview() {
           </div>
 
           {/* Notes et conditions */}
-          {(invoiceDetails.notes || invoiceDetails.terms) && (
+          {(invoiceDetails.invoiceDetails.notes || invoiceDetails.invoiceDetails.terms) && (
             <div className="space-y-4 mt-4">
-              {invoiceDetails.notes && (
+              {invoiceDetails.invoiceDetails.notes && (
                 <div>
                   <h3 className="font-semibold mb-1">Notes</h3>
                   <p className="text-sm text-muted-foreground">
-                    {invoiceDetails.notes}
+                    {invoiceDetails.invoiceDetails.notes}
                   </p>
                 </div>
               )}
 
-              {invoiceDetails.terms && (
+              {invoiceDetails.invoiceDetails.terms && (
                 <div>
                   <h3 className="font-semibold mb-1">Conditions</h3>
                   <p className="text-sm text-muted-foreground">
-                    {invoiceDetails.terms}
+                    {invoiceDetails.invoiceDetails.terms}
                   </p>
                 </div>
               )}
