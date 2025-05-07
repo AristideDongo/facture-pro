@@ -2,7 +2,6 @@
 
 import { useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
-
 import { Separator } from "@/components/ui/separator"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { ChevronDown, ChevronUp, User, Building, FileText, ShoppingCart, FileCheck, Loader2 } from "lucide-react"
@@ -17,9 +16,6 @@ import { InvoicePreview } from "./new-invoices/InvoicePreview"
 
 export function InvoiceGenerator() {
   const {
-    clientInfo,
-    companyInfo,
-    items,
     invoiceDetails,
     isClientInfoValid,
     isCompanyInfoValid,
@@ -27,7 +23,6 @@ export function InvoiceGenerator() {
     isInvoiceDetailsValid,
   } = useInvoiceStore()
 
-  // État pour gérer l'ouverture/fermeture des sections
   const [openSections, setOpenSections] = useState({
     client: true,
     company: true,
@@ -47,7 +42,6 @@ export function InvoiceGenerator() {
     }))
   }
 
-  // Fonction pour afficher l'icône d'état de validation
   const getValidationIcon = (isValid: boolean) => {
     return isValid ? (
       <span className="text-green-500 text-sm font-medium">✓ Valide</span>
@@ -206,31 +200,8 @@ export function InvoiceGenerator() {
         </CollapsibleContent>
       </Collapsible>
 
-      {/* Bouton de génération */}
-      <div className="flex justify-end my-6">
-        <Button
-          onClick={handleGenerateInvoice}
-          disabled={
-            !isClientInfoValid || !isCompanyInfoValid || !areItemsValid || !isInvoiceDetailsValid || isGenerating
-          }
-          size="lg"
-          className="w-full md:w-auto bg-orange-400 text-black hover:bg-orange-600"
-        >
-          {isGenerating ? (
-            <>
-              <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-              Génération en cours...
-            </>
-          ) : (
-            <>
-              <FileCheck className="mr-2 h-5 w-5" />
-              Générer la facture
-            </>
-          )}
-        </Button>
-      </div>
 
-      <Separator className="my-4" />
+      <Separator className="my-4 bg-orange-600" />
 
       {/* Aperçu de la facture */}
       <Collapsible
@@ -257,6 +228,30 @@ export function InvoiceGenerator() {
           </div>
         </CollapsibleContent>
       </Collapsible>
+
+            {/* Bouton de génération */}
+            <div className="flex justify-end my-6">
+        <Button
+          onClick={handleGenerateInvoice}
+          disabled={
+            !isClientInfoValid || !isCompanyInfoValid || !areItemsValid || !isInvoiceDetailsValid || isGenerating
+          }
+          size="lg"
+          className="w-full md:w-auto bg-orange-400 text-black hover:bg-orange-600"
+        >
+          {isGenerating ? (
+            <>
+              <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+              Génération en cours...
+            </>
+          ) : (
+            <>
+              <FileCheck className="mr-2 h-5 w-5" />
+              Générer la facture
+            </>
+          )}
+        </Button>
+      </div>
     </div>
   )
 }

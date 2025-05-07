@@ -157,7 +157,7 @@ export function InvoicePreview() {
             <Table className="overflow-hidden">
               <TableHeader>
                 <TableRow className="bg-orange-200">
-                  <TableHead className="w-[40%]">Description</TableHead>
+                  <TableHead className="w-[25%]">Description</TableHead>
                   <TableHead className="text-left">Notes</TableHead>
                   <TableHead className="text-right">Quantité</TableHead>
                   <TableHead className="text-right">Prix unitaire</TableHead>
@@ -170,7 +170,7 @@ export function InvoicePreview() {
                 {items.map((item, index) => (
                   <TableRow key={index}>
                     <TableCell className="font-medium">
-                      {item.description || "-"}
+                      {wrapText(item.description || "-", 50)}
                     </TableCell>
                     <TableCell className="text-left whitespace-pre-line">
                       {wrapText(item.notes || "", 30)}
