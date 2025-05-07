@@ -13,6 +13,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Card, CardContent } from "@/components/ui/card"
 import { useInvoiceStore } from "@/hooks/invoices/useInvoiceForm"
+import { formatFCFA } from "@/lib/format-money"
 
 // Schéma de validation pour un article
 const itemSchema = z.object({
@@ -248,12 +249,12 @@ export function ItemsForm() {
                     <TableCell className="font-medium">{item.description || "-"}</TableCell>
                     <TableCell className="text-right">{item.quantity}</TableCell>
                     <TableCell className="text-right">
-                      {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "XOF" }).format(item.unitPrice)}
+                      {formatFCFA(item.unitPrice)}
                     </TableCell>
                     <TableCell className="text-right">{item.taxRate}%</TableCell>
                     <TableCell className="text-right">{item.discount || 0}%</TableCell>
                     <TableCell className="text-right">
-                      {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "XOF" }).format(
+                      {formatFCFA(
                         calculateItemTotal(item),
                       )}
                     </TableCell>
@@ -264,7 +265,7 @@ export function ItemsForm() {
                     Total
                   </TableCell>
                   <TableCell className="text-right font-bold">
-                    {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
+                    {formatFCFA(
                       form.watch("items").reduce((sum, item) => sum + calculateItemTotal(item), 0),
                     )}
                   </TableCell>
