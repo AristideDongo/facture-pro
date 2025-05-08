@@ -24,7 +24,7 @@ export function InvoiceDetailsForm() {
   const form = useForm<InvoiceDetailsValues>({
     resolver: zodResolver(invoiceDetailsSchema),
     defaultValues: invoiceDetails || {
-        invoiceNumber: `INV-${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, "0")}-${String(Math.floor(Math.random() * 1000)).padStart(3, "0")}`,
+        invoiceNumber: `INV-${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, "0")}-`,
         issueDate: new Date(),
         dueDate: new Date(new Date().setDate(new Date().getDate() + 30)),
         status: "payé",

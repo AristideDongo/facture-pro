@@ -67,26 +67,24 @@ export const InvoicePDF= ({clientInfo, compagnyInfo, items, invoiceDetails} : In
       <View style={styles.card}>
         {/* En tête de la facture */}
         <View style={styles.header}>
+        <View style={styles.infoColumn}>
+            <View style={styles.infoConentWrapper}>
+              <Text style={[styles.infoContent, styles.compagnyName]}>{compagnyInfo.name}</Text>
+              <Text style={styles.infoContent}>{compagnyInfo.address}</Text>
+              <Text style={styles.infoContent}>{compagnyInfo.phone}</Text>
+              <Text style={styles.infoContent}>{compagnyInfo.email}</Text>
+            </View>
+          </View>
         <View>
           <Text style={styles.title}>FACTURE</Text>
           <Text style={styles.invoiceNumber}>#{invoiceDetails.invoiceNumber}</Text>
         </View>
         </View>
 
-        {/* Info entreprise et client  */}
+        {/* Info client  */}
         <View style={styles.infoContainer}>
           <View style={styles.infoColumn}>
-            <Text style={styles.infoLabel}>DE:</Text>
-            <View style={styles.infoConentWrapper}>
-              <Text style={[styles.infoContent, styles.boldText]}>{compagnyInfo.name}</Text>
-              <Text style={styles.infoContent}>{compagnyInfo.address}</Text>
-              <Text style={styles.infoContent}>{compagnyInfo.phone}</Text>
-              <Text style={styles.infoContent}>{compagnyInfo.email}</Text>
-            </View>
-          </View>
-
-          <View style={styles.infoColumn}>
-            <Text style={styles.infoLabel}>POUR:</Text>
+            <Text style={styles.infoLabel}>Client:</Text>
             <View>
               <Text style={[styles.infoContent, styles.boldText]}>{clientInfo.name}</Text>
               <Text style={styles.infoContent}>{clientInfo.address}</Text>
@@ -134,9 +132,6 @@ export const InvoicePDF= ({clientInfo, compagnyInfo, items, invoiceDetails} : In
             <View style={styles.tableHeader}>
               <View style={styles.descriptionCol}>
                 <Text style={styles.tableHeaderText}>Description</Text>
-              </View>
-              <View style={styles.notesCol}>
-                <Text style={styles.tableHeaderText}>Notes</Text>
               </View>
               <View style={styles.quantityCol}>
                 <Text style={[styles.tableHeaderText, styles.textRight]}>Quantité</Text>

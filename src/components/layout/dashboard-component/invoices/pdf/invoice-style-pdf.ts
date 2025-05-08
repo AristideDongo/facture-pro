@@ -13,15 +13,15 @@ const colors = {
 export const styles = StyleSheet.create({
   // Conteneur principal
   page: {
-    padding: 30,
-    fontFamily: 'Helvetica',
+    padding: 20,
+    fontFamily: 'Times-Roman',
     fontSize: 10,
     color: colors.black,
   },
   
   // Conteneur de la carte
   card: {
-    padding: 24,
+    padding: 16,
   },
   
   // Section principale avec espacement
@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
   },
   
   invoiceNumber: {
-    fontSize: 14,
+    fontSize: 10,
     fontWeight: 'bold',
     marginTop: 4,
   },
@@ -64,7 +64,7 @@ export const styles = StyleSheet.create({
   
   infoLabel: {
     fontSize: 10,
-    color: colors.muted,
+    color: colors.black,
     marginBottom: 8,
     fontWeight: 'bold',
   },
@@ -74,6 +74,11 @@ export const styles = StyleSheet.create({
   },
   
   boldText: {
+    fontWeight: 'bold',
+  },
+
+  compagnyName: {
+    fontSize: 18,
     fontWeight: 'bold',
   },
   
@@ -121,6 +126,9 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     minHeight: 30,
+    borderWidth: 1,
+    borderColor: colors.orange200,
+    borderStyle: 'solid',
   },
   
   tableCell: {
@@ -129,25 +137,22 @@ export const styles = StyleSheet.create({
   },
   
   descriptionCol: {
-    width: '25%',
-  },
-  
-  notesCol: {
-    width: '24%',
+    textAlign: 'left',
+    width: '30%',
   },
   
   quantityCol: {
-    width: '8%',
+    width: '10%',
     textAlign: 'right',
   },
   
   priceCol: {
-    width: '12%',
+    width: '18%',
     textAlign: 'right',
   },
   
   taxCol: {
-    width: '8%',
+    width: '11%',
     textAlign: 'right',
   },
   
@@ -158,7 +163,7 @@ export const styles = StyleSheet.create({
   },
   
   totalCol: {
-    width: '15%',
+    width: '23%',
     textAlign: 'right',
   },
   
