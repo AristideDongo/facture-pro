@@ -7,15 +7,16 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 import { ChevronDown, ChevronUp, User, Building, FileText, ShoppingCart, FileCheck, Loader2 } from "lucide-react"
 import { useInvoiceStore } from "@/hooks/invoices/useInvoiceForm"
 import { ClientInfoForm } from "./new-invoices/ClientInfoForm"
-import { compagnyInfoForm } from "./new-invoices/CompagnyInfoForm"
 import { InvoiceDetailsForm } from "./new-invoices/InvoicesDeatilsForm"
 import { ItemsForm } from "./new-invoices/FormInvoices"
 import { toast } from 'sonner'
 import { InvoicePreview } from "./new-invoices/InvoicePreview"
+import { CompagnyInfoForm } from "./new-invoices/CompagnyInfoForm"
+import { useRouter } from "next/navigation"
 
 export function InvoiceGenerator() {
   const {
-    invoiceDetails,
+    // invoiceDetails,
     isClientInfoValid,
     iscompagnyInfoValid,
     areItemsValid,
@@ -29,6 +30,8 @@ export function InvoiceGenerator() {
     items: true,
     preview: true,
   })
+
+  const router = useRouter()
 
   // Référence à l'élément d'aperçu de facture pour générer le PDF
   const invoiceRef = useRef<HTMLDivElement>(null)
@@ -81,6 +84,8 @@ export function InvoiceGenerator() {
       //   invoiceRef.current,
       //   `Facture_${invoiceDetails?.invoiceDetails.invoiceNumber || "Sans_Numéro"}.pdf`,
       // )
+
+      router.push('/dashboard/invoices/pdfinvoice')
 
       toast.success('Facture générée',{
         description: `La facture a été générée avec succès: `,
@@ -144,7 +149,7 @@ export function InvoiceGenerator() {
         </CollapsibleTrigger>
         <CollapsibleContent>
           <div className="p-4 bg-card">
-            <compagnyInfoForm />
+            <CompagnyInfoForm />
           </div>
         </CollapsibleContent>
       </Collapsible>

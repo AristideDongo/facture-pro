@@ -1,15 +1,20 @@
 import React from 'react';
 import { Page, Text, View, Document } from '@react-pdf/renderer';
 import { styles } from './invoice-style-pdf';
-import { ItemValues } from '@/types/invoiceSchema';
-import { useInvoiceStore } from '@/hooks/invoices/useInvoiceForm';
+import { ClientInfoValues, CompagnyInfoValues, InvoiceDetailsValues, ItemValues } from '@/types/invoiceSchema';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { wrapText } from '@/lib/wrapText';
 import { formatFCFA } from '@/lib/format';
 
-export const InvoicePDF = () => {
-const { clientInfo, compagnyInfo, items, invoiceDetails } = useInvoiceStore();
+type InvoicePDFProps = {
+  clientInfo: ClientInfoValues;
+  compagnyInfo: CompagnyInfoValues;
+  items: ItemValues[];
+  invoiceDetails: InvoiceDetailsValues;
+};
+
+export const InvoicePDF= ({clientInfo, compagnyInfo, items, invoiceDetails} : InvoicePDFProps) => {
 
   // Fonction pour calculer le total d'un article
   const calculateItemTotal = (item: ItemValues) => {
@@ -56,29 +61,29 @@ const { clientInfo, compagnyInfo, items, invoiceDetails } = useInvoiceStore();
         <View style={styles.header}>
         <View>
           <Text style={styles.title}>FACTURE</Text>
-          <Text style={styles.invoiceNumber}>#{invoiceDetails?.invoiceDetails.invoiceNumber}</Text>
+          <Text style={styles.invoiceNumber}>#{invoiceDetails.invoiceNumber}</Text>
         </View>
         </View>
 
         {/* Info entreprise et client  */}
         <View style={styles.infoContainer}>
           <View style={styles.infoColumn}>
-            <View style={styles.infoLabel}>DE:</View>
-            <View>
-              <View style={[styles.infoContent, styles.boldText]}>{compagnyInfo?.name}</View>
-              <View style={styles.infoContent}>{compagnyInfo?.address}</View>
-              <View style={styles.infoContent}>{compagnyInfo?.phone}</View>
-              <View style={styles.infoContent}>{compagnyInfo?.email}</View>
+            <Text style={styles.infoLabel}>DE:</Text>
+            <View style={styles.infoConentWrapper}>
+              <Text style={[styles.infoContent, styles.boldText]}>{compagnyInfo.name}</Text>
+              <Text style={styles.infoContent}>{compagnyInfo.address}</Text>
+              <Text style={styles.infoContent}>{compagnyInfo.phone}</Text>
+              <Text style={styles.infoContent}>{compagnyInfo.email}</Text>
             </View>
           </View>
 
           <View style={styles.infoColumn}>
-            <View style={styles.infoLabel}>POUR:</View>
+            <Text style={styles.infoLabel}>POUR:</Text>
             <View>
-              <View style={[styles.infoContent, styles.boldText]}>{clientInfo?.name}</View>
-              <View style={styles.infoContent}>{clientInfo?.address}</View>
-              <View style={styles.infoContent}>{clientInfo?.phone}</View>
-              <View style={styles.infoContent}>{clientInfo?.email}</View>
+              <Text style={[styles.infoContent, styles.boldText]}>{clientInfo.name}</Text>
+              <Text style={styles.infoContent}>{clientInfo.address}</Text>
+              <Text style={styles.infoContent}>{clientInfo.phone}</Text>
+              <Text style={styles.infoContent}>{clientInfo.email}</Text>
             </View>
           </View>
         </View>
@@ -86,10 +91,10 @@ const { clientInfo, compagnyInfo, items, invoiceDetails } = useInvoiceStore();
         {/* Dates et informations de paiement */}
         <View style={styles.datesContainer}>
             <View style={styles.dateColumn}>
-              <Text style={styles.dateLabel}>Date d'émission</Text>
+              <Text style={styles.dateLabel}>Date d&apos;émission</Text>
               <Text style={styles.dateValue}>
-                {invoiceDetails?.invoiceDetails.issueDate
-                  ? format(invoiceDetails.invoiceDetails.issueDate, "dd MMMM yyyy", {
+                {invoiceDetails.issueDate
+                  ? format(invoiceDetails.issueDate, "dd MMMM yyyy", {
                       locale: fr,
                     })
                   : "-"}
@@ -97,10 +102,10 @@ const { clientInfo, compagnyInfo, items, invoiceDetails } = useInvoiceStore();
             </View>
 
             <View style={styles.dateColumn}>
-              <Text style={styles.dateLabel}>Date d'échéance</Text>
+              <Text style={styles.dateLabel}>Date d&apos;échéance</Text>
               <Text style={styles.dateValue}>
-                {invoiceDetails?.invoiceDetails.dueDate
-                  ? format(invoiceDetails.invoiceDetails.dueDate, "dd MMMM yyyy", {
+                {invoiceDetails.dueDate
+                  ? format(invoiceDetails.dueDate, "dd MMMM yyyy", {
                       locale: fr,
                     })
                   : "-"}
@@ -110,7 +115,7 @@ const { clientInfo, compagnyInfo, items, invoiceDetails } = useInvoiceStore();
             <View style={styles.dateColumn}>
               <Text style={styles.dateLabel}>Méthode de paiement</Text>
               <Text style={styles.dateValue}>
-                {invoiceDetails?.invoiceDetails.paymentMethod || "-"}
+                {invoiceDetails?.paymentMethod || "-"}
               </Text>
             </View>
           </View>
@@ -206,22 +211,22 @@ const { clientInfo, compagnyInfo, items, invoiceDetails } = useInvoiceStore();
           </View>
 
           {/* Notes et conditions */}
-          {(invoiceDetails?.invoiceDetails.notes || invoiceDetails?.invoiceDetails.terms) && (
+          {(invoiceDetails?.notes || invoiceDetails?.terms) && (
             <View style={styles.notesSection}>
-              {invoiceDetails.invoiceDetails.notes && (
+              {invoiceDetails.notes && (
                 <View style={styles.section}>
                   <Text style={styles.notesTitle}>Notes</Text>
                   <Text style={styles.notesText}>
-                    {invoiceDetails.invoiceDetails.notes}
+                    {invoiceDetails.notes}
                   </Text>
                 </View>
               )}
 
-              {invoiceDetails.invoiceDetails.terms && (
+              {invoiceDetails.terms && (
                 <View style={styles.section}>
                   <Text style={styles.notesTitle}>Conditions</Text>
                   <Text style={styles.notesText}>
-                    {invoiceDetails.invoiceDetails.terms}
+                    {invoiceDetails.terms}
                   </Text>
                 </View>
               )}

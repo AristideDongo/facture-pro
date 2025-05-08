@@ -25,19 +25,24 @@ export function PDFView() {
           document={
             <InvoicePDF
               clientInfo={clientInfo}
-              companyInfo={compagnyInfo}
+              compagnyInfo={compagnyInfo}
               items={items}
               invoiceDetails={invoiceDetails}
             />
           }
-          fileName={`Facture-${invoiceDetails.invoiceDetails.invoiceNumber}.pdf`}
+          fileName={`Facture-${invoiceDetails.invoiceNumber}.pdf`}
           style={{ textDecoration: 'none' }}
         >
-          {({ blob, url, loading, error }) => (
+          {({ url, loading }) => (
             <Button 
               disabled={loading} 
               variant="default"
               className="bg-orange-500 hover:bg-orange-600"
+              onClick={() => {
+                if (url) {
+                  window.open(url, '_blank');
+                }
+              }}
             >
               {loading ? 'Préparation du PDF...' : 'Télécharger la facture PDF'}
             </Button>

@@ -77,7 +77,7 @@ export function InvoicePreview() {
             <div>
               <h1 className="text-2xl font-bold">FACTURE</h1>
               <p className="text-lg font-semibold mt-1">
-                #{invoiceDetails.invoiceDetails.invoiceNumber}
+                #{invoiceDetails.invoiceNumber}
               </p>
             </div>
 
@@ -123,8 +123,8 @@ export function InvoicePreview() {
             <div>
               <p className="text-sm text-muted-foreground">Date d&apos;émission</p>
               <p className="font-medium">
-                {invoiceDetails.invoiceDetails.issueDate
-                  ? format(invoiceDetails.invoiceDetails.issueDate, "dd MMMM yyyy", {
+                {invoiceDetails.issueDate
+                  ? format(invoiceDetails.issueDate, "dd MMMM yyyy", {
                       locale: fr,
                     })
                   : "-"}
@@ -134,8 +134,8 @@ export function InvoicePreview() {
             <div>
               <p className="text-sm text-muted-foreground">Date d&apos;échéance</p>
               <p className="font-medium">
-                {invoiceDetails.invoiceDetails.dueDate
-                  ? format(invoiceDetails.invoiceDetails.dueDate, "dd MMMM yyyy", {
+                {invoiceDetails.dueDate
+                  ? format(invoiceDetails.dueDate, "dd MMMM yyyy", {
                       locale: fr,
                     })
                   : "-"}
@@ -147,7 +147,7 @@ export function InvoicePreview() {
                 Méthode de paiement
               </p>
               <p className="font-medium">
-                {invoiceDetails.invoiceDetails.paymentMethod || "-"}
+                {invoiceDetails.paymentMethod || "-"}
               </p>
             </div>
           </div>
@@ -218,22 +218,22 @@ export function InvoicePreview() {
           </div>
 
           {/* Notes et conditions */}
-          {(invoiceDetails.invoiceDetails.notes || invoiceDetails.invoiceDetails.terms) && (
+          {(invoiceDetails.notes || invoiceDetails.terms) && (
             <div className="space-y-4 mt-4">
-              {invoiceDetails.invoiceDetails.notes && (
+              {invoiceDetails.notes && (
                 <div>
                   <h3 className="font-semibold mb-1">Notes</h3>
                   <p className="text-sm text-muted-foreground">
-                    {invoiceDetails.invoiceDetails.notes}
+                    {invoiceDetails.notes}
                   </p>
                 </div>
               )}
 
-              {invoiceDetails.invoiceDetails.terms && (
+              {invoiceDetails.terms && (
                 <div>
                   <h3 className="font-semibold mb-1">Conditions</h3>
                   <p className="text-sm text-muted-foreground">
-                    {invoiceDetails.invoiceDetails.terms}
+                    {invoiceDetails.terms}
                   </p>
                 </div>
               )}

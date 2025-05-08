@@ -1,12 +1,12 @@
 import { create } from 'zustand';
-import { ItemValues, ClientInfoValues, InvoiceValues, CompagnyInfoValues } from '@/types/invoiceSchema';
+import { ItemValues, ClientInfoValues, CompagnyInfoValues, InvoiceDetailsValues } from '@/types/invoiceSchema';
 
 interface InvoiceStore {
   // Données du formulaire
   clientInfo: ClientInfoValues | null;
   compagnyInfo: CompagnyInfoValues | null;
   items: ItemValues[] | null;
-  invoiceDetails: InvoiceValues | null;
+  invoiceDetails: InvoiceDetailsValues | null;
 
   isClientInfoValid: boolean;
   iscompagnyInfoValid: boolean;
@@ -17,7 +17,7 @@ interface InvoiceStore {
   setClientInfo: (clientInfo: ClientInfoValues) => void;
   setcompagnyInfo: (compagnyInfo: CompagnyInfoValues) => void;
   setItems: (items: ItemValues[]) => void;
-  setInvoiceDetails: (invoiceDetails: InvoiceValues) => void;
+  setInvoiceDetails: (invoiceDetails: InvoiceDetailsValues) => void;
 
   setClientInfoValid: (isValid: boolean) => void;
   setcompagnyInfoValid: (isValid: boolean) => void;

@@ -53,6 +53,10 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 24,
   },
+
+  infoConentWrapper:  {
+    marginTop: 4
+  },
   
   infoColumn: {
     width: '48%',
@@ -101,17 +105,12 @@ export const styles = StyleSheet.create({
   table: {
     display: 'flex',
     width: 'auto',
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: colors.muted,
     marginBottom: 24,
   },
   
   tableHeader: {
     flexDirection: 'row',
     backgroundColor: colors.orange200,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.muted,
     alignItems: 'center',
     height: 30,
     textAlign: 'center',
@@ -120,8 +119,6 @@ export const styles = StyleSheet.create({
   
   tableRow: {
     flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderBottomColor: colors.muted,
     alignItems: 'center',
     minHeight: 30,
   },
@@ -133,42 +130,31 @@ export const styles = StyleSheet.create({
   
   descriptionCol: {
     width: '25%',
-    borderRightWidth: 1,
-    borderRightColor: colors.muted,
   },
   
   notesCol: {
     width: '24%',
-    borderRightWidth: 1,
-    borderRightColor: colors.muted,
   },
   
   quantityCol: {
     width: '8%',
     textAlign: 'right',
-    borderRightWidth: 1,
-    borderRightColor: colors.muted,
   },
   
   priceCol: {
     width: '12%',
     textAlign: 'right',
-    borderRightWidth: 1,
-    borderRightColor: colors.muted,
   },
   
   taxCol: {
     width: '8%',
     textAlign: 'right',
-    borderRightWidth: 1,
-    borderRightColor: colors.muted,
   },
   
   discountCol: {
     width: '8%',
     textAlign: 'right',
-    borderRightWidth: 1,
-    borderRightColor: colors.muted,
+
   },
   
   totalCol: {
