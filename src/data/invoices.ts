@@ -6,7 +6,7 @@ export const invoices = [
       phone: "+225 01 23 45 67",
       email: "client1@example.com",
     },
-    companyInfo: {
+    compagnyInfo: {
       name: "Ma Société SARL",
       address: "456 Avenue des Affaires\nAbidjan, Côte d'Ivoire",
       phone: "+225 07 89 01 23",
@@ -40,7 +40,7 @@ export const invoices = [
       phone: "+225 02 34 56 78",
       email: "client2@example.com",
     },
-    companyInfo: {
+    compagnyInfo: {
       name: "Ma Société SARL",
       address: "456 Avenue des Affaires\nAbidjan, Côte d'Ivoire",
       phone: "+225 07 89 01 23",
@@ -74,7 +74,7 @@ export const invoices = [
       phone: "+225 02 34 56 78",
       email: "client2@example.com",
     },
-    companyInfo: {
+    compagnyInfo: {
       name: "Ma Société SARL",
       address: "456 Avenue des Affaires\nAbidjan, Côte d'Ivoire",
       phone: "+225 07 89 01 23",

@@ -1,26 +1,26 @@
 import { create } from 'zustand';
-import { ItemValues, ClientInfoValues, CompanyInfoValues, InvoiceValues } from '@/types/invoiceSchema';
+import { ItemValues, ClientInfoValues, InvoiceValues, CompagnyInfoValues } from '@/types/invoiceSchema';
 
 interface InvoiceStore {
   // Données du formulaire
   clientInfo: ClientInfoValues | null;
-  companyInfo: CompanyInfoValues | null;
+  compagnyInfo: CompagnyInfoValues | null;
   items: ItemValues[] | null;
   invoiceDetails: InvoiceValues | null;
 
   isClientInfoValid: boolean;
-  isCompanyInfoValid: boolean;
+  iscompagnyInfoValid: boolean;
   areItemsValid: boolean;
   isInvoiceDetailsValid: boolean;
 
   // Actions
   setClientInfo: (clientInfo: ClientInfoValues) => void;
-  setCompanyInfo: (companyInfo: CompanyInfoValues) => void;
+  setcompagnyInfo: (compagnyInfo: CompagnyInfoValues) => void;
   setItems: (items: ItemValues[]) => void;
   setInvoiceDetails: (invoiceDetails: InvoiceValues) => void;
 
   setClientInfoValid: (isValid: boolean) => void;
-  setCompanyInfoValid: (isValid: boolean) => void;
+  setcompagnyInfoValid: (isValid: boolean) => void;
   setItemsValid: (isValid: boolean) => void;
   setInvoiceDetailsValid: (isValid: boolean) => void;
 
@@ -29,35 +29,35 @@ interface InvoiceStore {
 
 export const useInvoiceStore = create<InvoiceStore>((set) => ({
   clientInfo: null,
-  companyInfo: null,
+  compagnyInfo: null,
   items: null,
   invoiceDetails: null,
 
   isClientInfoValid: false,
-  isCompanyInfoValid: false,
+  iscompagnyInfoValid: false,
   areItemsValid: false,
   isInvoiceDetailsValid: false,
 
   // Actions pour mettre à jour les données
   setClientInfo: (clientInfo) => set({ clientInfo }),
-  setCompanyInfo: (companyInfo) => set({ companyInfo }),
+  setcompagnyInfo: (compagnyInfo) => set({ compagnyInfo }),
   setItems: (items) => set({ items }),
   setInvoiceDetails: (invoiceDetails) => set({ invoiceDetails }),
 
   // Actions pour mettre à jour l'état de validation
   setClientInfoValid: (isValid) => set({ isClientInfoValid: isValid }),
-  setCompanyInfoValid: (isValid) => set({ isCompanyInfoValid: isValid }),
+  setcompagnyInfoValid: (isValid) => set({ iscompagnyInfoValid: isValid }),
   setItemsValid: (isValid) => set({ areItemsValid: isValid }),
   setInvoiceDetailsValid: (isValid) => set({ isInvoiceDetailsValid: isValid }),
 
   resetStore: () =>
     set({
       clientInfo: null,
-      companyInfo: null,
+      compagnyInfo: null,
       items: null,
       invoiceDetails: null,
       isClientInfoValid: false,
-      isCompanyInfoValid: false,
+      iscompagnyInfoValid: false,
       areItemsValid: false,
       isInvoiceDetailsValid: false,
     }),

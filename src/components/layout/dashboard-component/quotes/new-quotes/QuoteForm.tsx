@@ -67,7 +67,7 @@ export function DevisForm({ defaultValues, onSubmit }: DevisFormProps) {
           <div className="grid grid-cols-1 gap-4">
             <FormField
               control={form.control}
-              name="compagnyQuoteInfo.companyName"
+              name="compagnyQuoteInfo.compagnyName"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Nom de l&apos;entreprise</FormLabel>
@@ -81,7 +81,7 @@ export function DevisForm({ defaultValues, onSubmit }: DevisFormProps) {
 
             <FormField
               control={form.control}
-              name="compagnyQuoteInfo.companyAddress"
+              name="compagnyQuoteInfo.compagnyAddress"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Adresse</FormLabel>
@@ -96,7 +96,7 @@ export function DevisForm({ defaultValues, onSubmit }: DevisFormProps) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
-                name="compagnyQuoteInfo.companyEmail"
+                name="compagnyQuoteInfo.compagnyEmail"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Email</FormLabel>
@@ -110,7 +110,7 @@ export function DevisForm({ defaultValues, onSubmit }: DevisFormProps) {
 
               <FormField
                 control={form.control}
-                name="compagnyQuoteInfo.companyPhone"
+                name="compagnyQuoteInfo.compagnyPhone"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Téléphone</FormLabel>

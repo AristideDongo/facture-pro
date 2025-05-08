@@ -11,10 +11,10 @@ export const quote = [
       paymentTerms: "30 jours",
     },
     compagnyQuoteInfo: {
-      companyName: "Ma société",
-      companyAddress: "Abidjan",
-      companyEmail: "societe@example.com",
-      companyPhone: "0101010101",
+      compagnyName: "Ma société",
+      compagnyAddress: "Abidjan",
+      compagnyEmail: "societe@example.com",
+      compagnyPhone: "0101010101",
     },
     clientQuoteInfo: {
       clientName: "Client Exemple",

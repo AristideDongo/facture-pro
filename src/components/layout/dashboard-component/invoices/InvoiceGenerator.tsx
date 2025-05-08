@@ -5,10 +5,9 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { ChevronDown, ChevronUp, User, Building, FileText, ShoppingCart, FileCheck, Loader2 } from "lucide-react"
-import { generatePDF } from "@/lib/pdf-generator"
 import { useInvoiceStore } from "@/hooks/invoices/useInvoiceForm"
 import { ClientInfoForm } from "./new-invoices/ClientInfoForm"
-import { CompanyInfoForm } from "./new-invoices/CompagnyInfoForm"
+import { compagnyInfoForm } from "./new-invoices/CompagnyInfoForm"
 import { InvoiceDetailsForm } from "./new-invoices/InvoicesDeatilsForm"
 import { ItemsForm } from "./new-invoices/FormInvoices"
 import { toast } from 'sonner'
@@ -18,14 +17,14 @@ export function InvoiceGenerator() {
   const {
     invoiceDetails,
     isClientInfoValid,
-    isCompanyInfoValid,
+    iscompagnyInfoValid,
     areItemsValid,
     isInvoiceDetailsValid,
   } = useInvoiceStore()
 
   const [openSections, setOpenSections] = useState({
     client: true,
-    company: true,
+    compagny: true,
     invoice: true,
     items: true,
     preview: true,
@@ -51,7 +50,7 @@ export function InvoiceGenerator() {
   }
 
   const handleGenerateInvoice = async () => {
-    if (!isClientInfoValid || !isCompanyInfoValid || !areItemsValid || !isInvoiceDetailsValid) {
+    if (!isClientInfoValid || !iscompagnyInfoValid || !areItemsValid || !isInvoiceDetailsValid) {
       toast.warning('Formulaire incomplet',{
         description: "Veuillez remplir correctement tous les champs requis.",
         duration: 3000
@@ -78,13 +77,13 @@ export function InvoiceGenerator() {
       }
 
       // Générer le PDF
-      const fileName = await generatePDF(
-        invoiceRef.current,
-        `Facture_${invoiceDetails?.invoiceDetails.invoiceNumber || "Sans_Numéro"}.pdf`,
-      )
+      // const fileName = await generatePDF(
+      //   invoiceRef.current,
+      //   `Facture_${invoiceDetails?.invoiceDetails.invoiceNumber || "Sans_Numéro"}.pdf`,
+      // )
 
       toast.success('Facture générée',{
-        description: `La facture a été générée avec succès: ${fileName}`,
+        description: `La facture a été générée avec succès: `,
         duration: 3000
       })
     } catch (error) {
@@ -127,8 +126,8 @@ export function InvoiceGenerator() {
 
       {/* Section Informations Entreprise */}
       <Collapsible
-        open={openSections.company}
-        onOpenChange={() => toggleSection("company")}
+        open={openSections.compagny}
+        onOpenChange={() => toggleSection("compagny")}
         className="border rounded-lg overflow-hidden"
       >
         <CollapsibleTrigger asChild>
@@ -138,14 +137,14 @@ export function InvoiceGenerator() {
               <h2 className="text-lg font-medium">Informations Entreprise</h2>
             </div>
             <div className="flex items-center gap-3">
-              {getValidationIcon(isCompanyInfoValid)}
-              {openSections.company ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
+              {getValidationIcon(iscompagnyInfoValid)}
+              {openSections.compagny ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
             </div>
           </div>
         </CollapsibleTrigger>
         <CollapsibleContent>
           <div className="p-4 bg-card">
-            <CompanyInfoForm />
+            <compagnyInfoForm />
           </div>
         </CollapsibleContent>
       </Collapsible>
@@ -234,7 +233,7 @@ export function InvoiceGenerator() {
         <Button
           onClick={handleGenerateInvoice}
           disabled={
-            !isClientInfoValid || !isCompanyInfoValid || !areItemsValid || !isInvoiceDetailsValid || isGenerating
+            !isClientInfoValid || !iscompagnyInfoValid || !areItemsValid || !isInvoiceDetailsValid || isGenerating
           }
           size="lg"
           className="w-full md:w-auto bg-orange-400 text-black hover:bg-orange-600"

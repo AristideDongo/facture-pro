@@ -2,10 +2,10 @@ import { z } from "zod";
 
 export const compagnyQuoteSchema = z.object({
   // Informations de l'entreprise
-  companyName: z.string().min(1, "Le nom de l'entreprise est requis"),
-  companyAddress: z.string().min(1, "L'adresse de l'entreprise est requise"),
-  companyEmail: z.string().email("Email invalide"),
-  companyPhone: z.string().min(1, "Le téléphone est requis"),
+  compagnyName: z.string().min(1, "Le nom de l'entreprise est requis"),
+  compagnyAddress: z.string().min(1, "L'adresse de l'entreprise est requise"),
+  compagnyEmail: z.string().email("Email invalide"),
+  compagnyPhone: z.string().min(1, "Le téléphone est requis"),
 });
 
 export const clientQuoteSchema = z.object({

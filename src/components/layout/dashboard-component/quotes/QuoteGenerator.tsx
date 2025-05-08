@@ -9,10 +9,10 @@ import { DevisInfo } from "@/types/quoteSchema"
 
 export const defaultQuote: DevisInfo = {
   compagnyQuoteInfo: {
-    companyName: "Your Company",
-    companyAddress: "123 Business Street, 75000 Paris",
-    companyEmail: "contact@yourcompany.com",
-    companyPhone: "01 23 45 67 89",
+    compagnyName: "Your compagny",
+    compagnyAddress: "123 Business Street, 75000 Paris",
+    compagnyEmail: "contact@yourcompagny.com",
+    compagnyPhone: "01 23 45 67 89",
   },
   
   clientQuoteInfo: {

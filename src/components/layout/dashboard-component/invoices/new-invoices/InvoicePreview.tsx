@@ -18,7 +18,7 @@ import { wrapText } from "@/lib/wrapText";
 import { ItemValues } from "@/types/invoiceSchema";
 
 export function InvoicePreview() {
-  const { clientInfo, companyInfo, items, invoiceDetails } = useInvoiceStore();
+  const { clientInfo, compagnyInfo, items, invoiceDetails } = useInvoiceStore();
 
   // Fonction pour calculer le total d'un article
   const calculateItemTotal = (item: ItemValues) => {
@@ -58,7 +58,7 @@ export function InvoicePreview() {
     return items.reduce((sum, item) => sum + calculateItemTotal(item), 0);
   };
 
-  if (!clientInfo || !companyInfo || !items || !invoiceDetails) {
+  if (!clientInfo || !compagnyInfo || !items || !invoiceDetails) {
     return (
       <div className="text-center p-6 text-muted-foreground">
         Remplissez les formulaires pour voir l&apos;aperçu de la facture
@@ -81,11 +81,11 @@ export function InvoicePreview() {
               </p>
             </div>
 
-            {/* {companyInfo.logo && (
+            {/* {compagnyInfo.logo && (
               <div className="flex justify-center md:justify-end">
                 <img
-                  src={companyInfo.logo || "/placeholder.svg"}
-                  alt={`Logo ${companyInfo.name}`}
+                  src={compagnyInfo.logo || "/placeholder.svg"}
+                  alt={`Logo ${compagnyInfo.name}`}
                   className="h-16 object-contain"
                 />
               </div>
@@ -97,11 +97,11 @@ export function InvoicePreview() {
             <div>
               <h2 className="font-semibold text-muted-foreground mb-2">DE:</h2>
               <div className="space-y-1">
-                <p className="font-bold">{companyInfo.name}</p>
-                <p className="whitespace-pre-line">{companyInfo.address}</p>
-                <p>{companyInfo.phone}</p>
-                <p>{companyInfo.email}</p>
-                {/* {companyInfo.website && <p>{companyInfo.website}</p>} */}
+                <p className="font-bold">{compagnyInfo.name}</p>
+                <p className="whitespace-pre-line">{compagnyInfo.address}</p>
+                <p>{compagnyInfo.phone}</p>
+                <p>{compagnyInfo.email}</p>
+                {/* {compagnyInfo.website && <p>{compagnyInfo.website}</p>} */}
               </div>
             </div>
 

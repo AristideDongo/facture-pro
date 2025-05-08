@@ -35,7 +35,7 @@ export function InvoiceDetailsForm() {
         notes: "",
         terms: "Paiement à réception de la facture. Tout retard de paiement entraînera des pénalités.",
       },
-      companyInfo: {
+      compagnyInfo: {
         name: "",
         address: "",
         phone: "",

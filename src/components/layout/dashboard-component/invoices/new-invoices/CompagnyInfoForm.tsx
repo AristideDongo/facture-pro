@@ -8,14 +8,14 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useInvoiceStore } from "@/hooks/invoices/useInvoiceForm"
-import { companyInfoSchema, CompanyInfoValues } from "@/types/invoiceSchema"
+import { compagnyInfoSchema, CompagnyInfoValues } from "@/types/invoiceSchema"
 
-export function CompanyInfoForm() {
-  const { companyInfo, setCompanyInfo, setCompanyInfoValid } = useInvoiceStore()
+export function CompagnyInfoForm() {
+  const { compagnyInfo, setcompagnyInfo, setcompagnyInfoValid } = useInvoiceStore()
 
-  const form = useForm<CompanyInfoValues>({
-    resolver: zodResolver(companyInfoSchema),
-    defaultValues: companyInfo || {
+  const form = useForm<CompagnyInfoValues>({
+    resolver: zodResolver(compagnyInfoSchema),
+    defaultValues: compagnyInfo || {
       name: "",
       address: "",
       phone: "",
@@ -29,22 +29,22 @@ export function CompanyInfoForm() {
   useEffect(() => {
     const subscription = form.watch(() => {
       if (form.formState.isDirty) {
-        setCompanyInfo(form.getValues())
+        setcompagnyInfo(form.getValues())
       }
     })
 
     return () => subscription.unsubscribe()
-  }, [form, setCompanyInfo])
+  }, [form, setcompagnyInfo])
 
   // Mettre à jour la validité du formulaire dans le store
   useEffect(() => {
-    setCompanyInfoValid(formState.isValid)
+    setcompagnyInfoValid(formState.isValid)
 
     // Si le formulaire est valide et a été modifié, mettre à jour le store
     if (formState.isValid && formState.isDirty) {
-      setCompanyInfo(form.getValues())
+      setcompagnyInfo(form.getValues())
     }
-  }, [formState.isValid, formState.isDirty, setCompanyInfoValid, setCompanyInfo, form])
+  }, [formState.isValid, formState.isDirty, setcompagnyInfoValid, setcompagnyInfo, form])
 
   return (
     <Form {...form}>

@@ -12,7 +12,7 @@ export const invoiceDetailsSchema = z.object({
   currency: z.string(),
 })
 
-export const companyInfoSchema = z.object({
+export const compagnyInfoSchema = z.object({
   name: z.string().min(2, { message: "Le nom doit contenir au moins 2 caractères" }),
   address: z.string().min(5, { message: "L'adresse doit contenir au moins 5 caractères" }),
   phone: z.string().min(10, { message: "Numéro de téléphone invalide" }),
@@ -29,7 +29,7 @@ export const clientInfoSchema = z.object({
 // Schéma global combiné avec 'amount' ajouté
 export const fullInvoiceSchema = z.object({
   invoiceDetails: invoiceDetailsSchema,
-  companyInfo: companyInfoSchema,
+  compagnyInfo: compagnyInfoSchema,
   clientInfo: clientInfoSchema,
   amount: z.number().min(0, { message: "Le montant ne peut pas être négatif" }),
 })
@@ -51,7 +51,7 @@ export const itemsSchema = z.object({
 })
 
 export type ClientInfoValues = z.infer<typeof clientInfoSchema>
-export type CompanyInfoValues = z.infer<typeof companyInfoSchema>
+export type CompagnyInfoValues = z.infer<typeof compagnyInfoSchema>
 export type InvoiceDetailsValues = z.infer<typeof invoiceDetailsSchema>
 export type InvoiceValues = z.infer<typeof fullInvoiceSchema>
 

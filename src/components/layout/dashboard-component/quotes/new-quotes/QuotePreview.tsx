@@ -16,10 +16,10 @@ export function DevisPreview({ devisInfo }: DevisPreviewProps) {
       {/* En-tête du devis */}
       <div className="flex flex-col sm:flex-row justify-between mb-8">
         <div>
-          <h3 className="font-bold text-xl">{devisInfo.compagnyQuoteInfo.companyName}</h3>
-          <p className="whitespace-pre-line">{devisInfo.compagnyQuoteInfo.companyAddress}</p>
-          <p>{devisInfo.compagnyQuoteInfo.companyEmail}</p>
-          <p>{devisInfo.compagnyQuoteInfo.companyPhone}</p>
+          <h3 className="font-bold text-xl">{devisInfo.compagnyQuoteInfo.compagnyName}</h3>
+          <p className="whitespace-pre-line">{devisInfo.compagnyQuoteInfo.compagnyAddress}</p>
+          <p>{devisInfo.compagnyQuoteInfo.compagnyEmail}</p>
+          <p>{devisInfo.compagnyQuoteInfo.compagnyPhone}</p>
         </div>
 
         <div className="mt-4 sm:mt-0 sm:text-right">
@@ -100,7 +100,7 @@ export function DevisPreview({ devisInfo }: DevisPreviewProps) {
         </div>
 
         <div className="text-right">
-          <p className="font-medium">{devisInfo.compagnyQuoteInfo.companyName}</p>
+          <p className="font-medium">{devisInfo.compagnyQuoteInfo.compagnyName}</p>
           <div className="h-20 border-b mt-8"></div>
         </div>
       </div>

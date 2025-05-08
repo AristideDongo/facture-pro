@@ -12,4 +12,3 @@ export function getStatus(status: string) {
         return null
     }
   }
-  
