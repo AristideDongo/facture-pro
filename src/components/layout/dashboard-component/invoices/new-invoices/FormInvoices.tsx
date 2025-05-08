@@ -23,7 +23,7 @@ export function ItemsForm() {
       items:
         items && items.length > 0
           ? items
-          : [{ description: "", quantity: 1, unitPrice: 0, taxRate: 20, discount: 0, notes: "" }],
+          : [{ description: "", quantity: 1, unitPrice: 0, taxRate: 20, discount: 0 }],
     },
   })
 
@@ -79,7 +79,6 @@ export function ItemsForm() {
                 unitPrice: 0,
                 taxRate: 20,
                 discount: 0,
-                notes: "",
               })
             }
           >
@@ -187,20 +186,6 @@ export function ItemsForm() {
                     </div>
                   </div>
                 </div>
-
-                <FormField
-                  control={form.control}
-                  name={`items.${index}.notes`}
-                  render={({ field }) => (
-                    <FormItem className="mt-4">
-                      <FormLabel>Notes</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="Notes supplémentaires" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
               </CardContent>
             </Card>
           ))}

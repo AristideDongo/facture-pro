@@ -19,7 +19,7 @@ export function PDFView() {
   const isDataComplete = clientInfo && compagnyInfo && items?.length > 0 && invoiceDetails;
   
   return (
-    <div className="flex justify-end mt-6">
+    <div className="flex justify-center mt-6">
       {isDataComplete ? (
         <PDFDownloadLink
           document={

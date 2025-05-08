@@ -42,7 +42,6 @@ export const itemSchema = z.object({
   unitPrice: z.coerce.number().positive({ message: "Le prix unitaire doit être positif" }),
   taxRate: z.coerce.number().min(0, { message: "Le taux de TVA ne peut pas être négatif" }),
   discount: z.coerce.number().min(0, { message: "La remise ne peut pas être négative" }).optional(),
-  notes: z.string().optional(),
 })
 
 // Schéma de validation pour la liste d'articles

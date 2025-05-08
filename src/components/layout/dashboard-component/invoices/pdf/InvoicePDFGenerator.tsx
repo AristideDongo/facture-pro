@@ -53,6 +53,14 @@ export const InvoicePDF= ({clientInfo, compagnyInfo, items, invoiceDetails} : In
     if (!items || items.length === 0) return 0;
     return items.reduce((sum, item) => sum + calculateItemTotal(item), 0);
   };
+
+  if (!clientInfo || !compagnyInfo || !items || !invoiceDetails) {
+    return (
+      <div className="text-center p-6 text-muted-foreground">
+        Remplissez les formulaires pour télécharger la facture de la facture
+      </div>
+    );
+  }
   return(
   <Document>
     <Page size="A4" style={styles.page}>
@@ -153,11 +161,6 @@ export const InvoicePDF= ({clientInfo, compagnyInfo, items, invoiceDetails} : In
                 <View style={styles.descriptionCol}>
                   <Text style={styles.tableCell}>
                     {wrapText(item.description || "-", 50)}
-                  </Text>
-                </View>
-                <View style={styles.notesCol}>
-                  <Text style={styles.tableCell}>
-                    {wrapText(item.notes || "", 30)}
                   </Text>
                 </View>
                 <View style={styles.quantityCol}>
