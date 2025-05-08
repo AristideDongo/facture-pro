@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Card } from "@/components/ui/card"
 import { DevisForm } from "./new-quotes/QuoteForm"
 import { DevisPreview } from "./new-quotes/QuotePreview"
-import { DevisActions } from "./QuoteActions"
+// import { DevisActions } from "./QuoteActions"
 import { DevisInfo } from "@/types/quoteSchema"
 
 export const defaultQuote: DevisInfo = {
@@ -45,17 +45,17 @@ export function DevisGenerator() {
   }
 
   // Fonction pour réinitialiser le devis
-  const resetDevis = () => {
-    setDevisInfo({
-      ...defaultQuote,
-      quoteDetailsSchema: {
-        ...defaultQuote.quoteDetailsSchema,
-        quoteNumber: `QUOTE-${new Date().getFullYear()}-001`,
-        quoteDate: new Date().toISOString().split("T")[0],
-        expirationDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
-      }
-    })
-  }
+  // const resetDevis = () => {
+  //   setDevisInfo({
+  //     ...defaultQuote,
+  //     quoteDetailsSchema: {
+  //       ...defaultQuote.quoteDetailsSchema,
+  //       quoteNumber: `QUOTE-${new Date().getFullYear()}-001`,
+  //       quoteDate: new Date().toISOString().split("T")[0],
+  //       expirationDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
+  //     }
+  //   })
+  // }
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -73,7 +73,7 @@ export function DevisGenerator() {
         </Card>
 
         <Card className="p-6">
-          <DevisActions devisInfo={devisInfo} resetDevis={resetDevis} />
+          {/* <DevisActions devisInfo={devisInfo} resetDevis={resetDevis} /> */}
         </Card>
       </div>
     </div>
