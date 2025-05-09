@@ -24,6 +24,8 @@
                 └── 📁new
                     └── page.tsx
                 └── page.tsx
+                └── 📁pdfinvoice
+                    └── page.tsx
             └── layout.tsx
             └── 📁overview
                 └── page.tsx
@@ -31,12 +33,15 @@
                 └── 📁new
                     └── page.tsx
                 └── page.tsx
+                └── 📁pdfquote
+                    └── page.tsx
         └── globals.css
         └── layout.tsx
         └── Loader.tsx
         └── page.tsx
     └── 📁components
         └── 📁common
+            └── ButtonMoreActionSummary.tsx
             └── CallToAction.tsx
         └── 📁layout
             └── 📁dashboard-component
@@ -51,6 +56,10 @@
                         └── FormInvoices.tsx
                         └── InvoicePreview.tsx
                         └── InvoicesDeatilsForm.tsx
+                    └── 📁pdf
+                        └── InvoicePDFGenerator.tsx
+                        └── InvoicePDFView.tsx
+                        └── invoiceStylePdf.ts
                 └── 📁overview
                     └── ActivitySummary.tsx
                     └── RenderListActivitySummary.tsx
@@ -58,6 +67,10 @@
                     └── 📁new-quotes
                         └── QuoteForm.tsx
                         └── QuotePreview.tsx
+                    └── 📁pdf
+                        └── QuotePDFGenerator.tsx
+                        └── QuotePDFView.tsx
+                        └── quoteStylePdf.ts
                     └── 📁quote-summary
                         └── QuoteSummary.tsx
                         └── RenderListQuoteSummary.tsx
@@ -106,15 +119,17 @@
         └── quotes.ts
         └── testimonials.ts
     └── 📁hooks
-        └── 📁invoices
-            └── useInvoiceForm.ts
     └── 📁lib
         └── calculeAmount.ts
         └── format.ts
         └── getSatus.tsx
-        └── pdf-generator.ts
         └── utils.ts
         └── wrapText.ts
+    └── 📁store
+        └── 📁invoices
+            └── useInvoiceStore.ts
+        └── 📁quotes
+            └── useQuoteStore.ts
     └── 📁types
         └── invoiceSchema.ts
         └── quoteSchema.ts

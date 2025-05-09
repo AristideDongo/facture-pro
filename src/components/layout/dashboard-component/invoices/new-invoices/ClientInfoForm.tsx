@@ -7,7 +7,7 @@ import { useEffect } from "react"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { useInvoiceStore } from "@/hooks/invoices/useInvoice"
+import { useInvoiceStore } from "@/store/invoices/useInvoiceStore"
 import { clientInfoSchema, ClientInfoValues } from "@/types/invoiceSchema"
 
 export function ClientInfoForm() {

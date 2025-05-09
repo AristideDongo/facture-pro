@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card"
 import { DevisForm } from "./new-quotes/QuoteForm"
 import { DevisPreview } from "./new-quotes/QuotePreview"
 import { DevisActions } from "./QuoteActions"
-import { useDevisStore } from "@/hooks/quotes/useQuote"
+import { useDevisStore } from "@/store/quotes/useQuoteStore"
 
 export function DevisGenerator() {
   const { devisInfo, updateDevisInfo, resetDevis } = useDevisStore();

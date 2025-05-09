@@ -15,7 +15,7 @@ import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { useInvoiceStore } from "@/hooks/invoices/useInvoice"
+import { useInvoiceStore } from "@/store/invoices/useInvoiceStore"
 import { invoiceDetailsSchema, InvoiceDetailsValues } from "@/types/invoiceSchema"
 
 export function InvoiceDetailsForm() {

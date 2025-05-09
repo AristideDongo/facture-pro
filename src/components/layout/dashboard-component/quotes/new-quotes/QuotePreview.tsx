@@ -1,5 +1,5 @@
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { useDevisStore } from "@/hooks/quotes/useQuote";
+import { useDevisStore } from "@/store/quotes/useQuoteStore";
 import { formatFCFA } from "@/lib/format"
 import { DevisInfo } from "@/types/quoteSchema"
 

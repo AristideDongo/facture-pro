@@ -3,7 +3,7 @@ import React from 'react';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { Button } from '@/components/ui/button';
 import QuotePDF from './QuotePDFGenerator';
-import { useDevisStore } from '@/hooks/quotes/useQuote';
+import { useDevisStore } from '@/store/quotes/useQuoteStore';
 
 export function PDFViewQuote() {
   const { devisInfo, updateDevisInfo, resetDevis } = useDevisStore();

@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import { useInvoiceStore } from '@/hooks/invoices/useInvoice';
+import { useInvoiceStore } from '@/store/invoices/useInvoiceStore';
 import { Button } from '@/components/ui/button';
 import { InvoicePDF } from './InvoicePDFGenerator';
 
