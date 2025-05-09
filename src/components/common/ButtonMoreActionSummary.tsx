@@ -3,8 +3,6 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Button } from '@/components/ui/button';
 import { Eye, FileEdit, MoreVertical, Trash2 } from 'lucide-react';
 
-type Props = {}
-
 export default function ButtonMoreActionSummary({}) {
   return (
     <div>

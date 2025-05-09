@@ -1,11 +1,9 @@
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useDevisStore } from "@/store/quotes/useQuoteStore";
 import { formatFCFA } from "@/lib/format"
-import { DevisInfo } from "@/types/quoteSchema"
-
 
 export function DevisPreview() {
-  const { devisInfo, updateDevisInfo, resetDevis } = useDevisStore();
+  const { devisInfo } = useDevisStore();
   const totalHT = devisInfo.quoteDetailsSchema.services.reduce((total, item) => total + item.quantity * item.unitPrice, 0)
   const tva = totalHT * devisInfo.quoteDetailsSchema.taxRate / 100
   const totalTTC = totalHT + tva

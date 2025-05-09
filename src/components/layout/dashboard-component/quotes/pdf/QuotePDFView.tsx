@@ -6,7 +6,7 @@ import QuotePDF from './QuotePDFGenerator';
 import { useDevisStore } from '@/store/quotes/useQuoteStore';
 
 export function PDFViewQuote() {
-  const { devisInfo, updateDevisInfo, resetDevis } = useDevisStore();
+  const { devisInfo } = useDevisStore();
   if (!devisInfo) {
     return (
       <div className="text-center p-6 text-muted-foreground">
@@ -14,7 +14,6 @@ export function PDFViewQuote() {
       </div>
     );
   }
-
   const isDataComplete = devisInfo
   
   return (
