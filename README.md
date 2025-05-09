@@ -14,18 +14,16 @@ Application web construite avec **Next.js** et **pnpm** permettant de créer, g�
 - Création de devis et de factures
 - Export PDF des documents
 - Calcul automatique des totaux (HT, TVA, TTC)
-- Numérotation automatique
 - Gestion des échéances et des statuts (payée, en attente, en retard)
 
 ###  Gestion des clients
 - Ajout, édition et recherche de clients
-
 ---
 
 ##  Tableau de bord
 
 - Vue d’ensemble des devis/factures créés
-- Montants facturés et reçus
+- Montants facturés
 - Liste des dernières activités (devis/factures récents)
 - Filtres : client, période, statut
 
