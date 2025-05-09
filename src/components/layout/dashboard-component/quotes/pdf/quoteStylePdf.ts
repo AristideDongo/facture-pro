@@ -190,10 +190,4 @@ export const styles = StyleSheet.create({
       fontSize: 8,
       marginBottom: 40,
     },
-    signatureLine: {
-      height: 1,
-      backgroundColor: colors.muted,
-      width: '100%',
-      marginTop: 40,
-    }
   })

@@ -129,12 +129,10 @@ const QuotePDF = ({ devisInfo }: PDFQuote) => {
           <View style={styles.signatureBlock}>
             <Text style={styles.signatureTitle}>Bon pour accord</Text>
             <Text style={styles.signatureSubtitle}>Date et signature du client</Text>
-            <View style={styles.signatureLine} />
           </View>
 
           <View style={styles.signatureCompanyBlock}>
             <Text style={styles.signatureTitle}>{devisInfo.compagnyQuoteInfo.compagnyName}</Text>
-            <View style={styles.signatureLine} />
           </View>
         </View>
       </Page>
