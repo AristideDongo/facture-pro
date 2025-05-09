@@ -1,9 +1,7 @@
-import { Button } from '@/components/ui/button';
+import ButtonMoreActionSummary from '@/components/common/ButtonMoreActionSummary';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { getStatus } from '@/lib/getSatus';
 import { InvoiceValues } from '@/types/invoiceSchema';
-import { Eye, FileEdit, MoreVertical, Trash2 } from 'lucide-react';
 import React from 'react';
 
 interface props {
@@ -39,24 +37,7 @@ export default function RenderListInvoiceSummary({filteredInvoiceSummary}: props
                 <div className='text-center'>{invoice.invoiceDetails.status !== 'quote' && getStatus(invoice.invoiceDetails.status)}</div>
               </CardContent>
 
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <MoreVertical className="w-5 h-5" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem>
-                    <Eye className="mr-2 w-5 h-5" /> Voir
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <FileEdit className="mr-2 w-5 h-5" /> Modifier
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="text-destructive">
-                    <Trash2 className="mr-2 w-5 h-5" /> Supprimer
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <ButtonMoreActionSummary/>
             </div>
           </div>
         </Card>

@@ -1,36 +1,30 @@
 'use client'
 import React from 'react';
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import { useInvoiceStore } from '@/hooks/invoices/useInvoiceForm';
 import { Button } from '@/components/ui/button';
-import { InvoicePDF } from './InvoicePDFGenerator';
+import QuotePDF from './QuotePDFGenerator';
+import { useDevisStore } from '@/hooks/quotes/useQuote';
 
-export function PDFView() {
-  const { clientInfo, compagnyInfo, items, invoiceDetails } = useInvoiceStore();
-  
-  if (!clientInfo || !compagnyInfo || !items || !invoiceDetails) {
+export function PDFViewQuote() {
+  const { devisInfo, updateDevisInfo, resetDevis } = useDevisStore();
+  if (!devisInfo) {
     return (
       <div className="text-center p-6 text-muted-foreground">
-        Remplissez les formulaires pour télécharger la facture de la facture
+        Remplissez les formulaires pour télécharger le dévis
       </div>
     );
   }
 
-  const isDataComplete = clientInfo && compagnyInfo && items?.length > 0 && invoiceDetails;
+  const isDataComplete = devisInfo
   
   return (
     <div className="flex justify-center mt-6">
       {isDataComplete ? (
         <PDFDownloadLink
           document={
-            <InvoicePDF
-              clientInfo={clientInfo}
-              compagnyInfo={compagnyInfo}
-              items={items}
-              invoiceDetails={invoiceDetails}
-            />
+            <QuotePDF devisInfo={devisInfo}/>
           }
-          fileName={`Facture-${invoiceDetails.invoiceNumber}.pdf`}
+          fileName={`Facture-${devisInfo.quoteDetailsSchema.quoteNumber}.pdf`}
           style={{ textDecoration: 'none' }}
         >
           {({ url, loading }) => (
@@ -44,7 +38,7 @@ export function PDFView() {
                 }
               }}
             >
-              {loading ? 'Préparation du PDF...' : 'Télécharger la facture PDF'}
+              {loading ? 'Préparation du PDF...' : 'Télécharger le dévis PDF'}
             </Button>
           )}
         </PDFDownloadLink>

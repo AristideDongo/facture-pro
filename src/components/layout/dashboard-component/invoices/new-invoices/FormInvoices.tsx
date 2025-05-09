@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Card, CardContent } from "@/components/ui/card"
-import { useInvoiceStore } from "@/hooks/invoices/useInvoiceForm"
+import { useInvoiceStore } from "@/hooks/invoices/useInvoice"
 import { formatFCFA } from "@/lib/format"
 import { itemsSchema, ItemsValues, ItemValues } from "@/types/invoiceSchema"
 

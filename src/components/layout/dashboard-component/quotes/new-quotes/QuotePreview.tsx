@@ -1,12 +1,11 @@
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { useDevisStore } from "@/hooks/quotes/useQuote";
 import { formatFCFA } from "@/lib/format"
 import { DevisInfo } from "@/types/quoteSchema"
 
-interface DevisPreviewProps {
-  devisInfo: DevisInfo
-}
 
-export function DevisPreview({ devisInfo }: DevisPreviewProps) {
+export function DevisPreview() {
+  const { devisInfo, updateDevisInfo, resetDevis } = useDevisStore();
   const totalHT = devisInfo.quoteDetailsSchema.services.reduce((total, item) => total + item.quantity * item.unitPrice, 0)
   const tva = totalHT * devisInfo.quoteDetailsSchema.taxRate / 100
   const totalTTC = totalHT + tva
@@ -55,9 +54,9 @@ export function DevisPreview({ devisInfo }: DevisPreviewProps) {
               <TableRow key={index}>
                 <TableCell className="border p-2">{prestation.description || "[Description]"}</TableCell>
                 <TableCell className="border p-2 text-center">{prestation.quantity}</TableCell>
-                <TableCell className="border p-2 text-right">{prestation.unitPrice.toFixed(2)} €</TableCell>
+                <TableCell className="border p-2 text-right">{prestation.unitPrice.toFixed(2)}</TableCell>
                 <TableCell className="border p-2 text-right">
-                  {(prestation.quantity * prestation.unitPrice).toFixed(2)} €
+                  {(prestation.quantity * prestation.unitPrice).toFixed(2)}
                 </TableCell>
               </TableRow>
             ))}
@@ -96,12 +95,12 @@ export function DevisPreview({ devisInfo }: DevisPreviewProps) {
         <div>
           <p className="font-medium">Bon pour accord</p>
           <p className="text-xs mt-1">Date et signature du client</p>
-          <div className="h-20 border-b mt-8"></div>
+          <div className="h-20 mt-8"></div>
         </div>
 
-        <div className="text-right">
+        <div className="text-center">
           <p className="font-medium">{devisInfo.compagnyQuoteInfo.compagnyName}</p>
-          <div className="h-20 border-b mt-8"></div>
+          <div className="h-20 mt-13"></div>
         </div>
       </div>
     </div>

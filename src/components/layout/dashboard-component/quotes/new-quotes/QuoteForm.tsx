@@ -16,6 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { DevisInfo, fullQuoteSchema } from "@/types/quoteSchema";
+import { useEffect } from "react";
 
 interface DevisFormProps {
   defaultValues: DevisInfo;
@@ -45,21 +46,19 @@ export function DevisForm({ defaultValues, onSubmit }: DevisFormProps) {
     onSubmit(data);
   });
 
-  // Mettre à jour l'aperçu en temps réel
-  const handleChange = () => {
-    const isValid = form.formState.isValid;
-    if (isValid) {
-      handleSubmit();
-    }
-  };
+  useEffect(() => {
+    const subscription = form.watch((value) => {
+      if (form.formState.isValid) {
+        onSubmit(value as DevisInfo);
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [form]);
 
   return (
     <Form {...form}>
-      <form
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-        className="space-y-6"
-      >
+      <form onSubmit={handleSubmit} className="space-y-6">
         {/* Informations de l'entreprise */}
         <div className="space-y-4">
           <h3 className="font-medium">Informations de l&apos;entreprise</h3>
@@ -248,7 +247,7 @@ export function DevisForm({ defaultValues, onSubmit }: DevisFormProps) {
                 <FormItem>
                   <FormLabel>TVA</FormLabel>
                   <FormControl>
-                    <Input {...field} type="number" step='0.1' min="0" />
+                    <Input {...field} type="number" step="0.1" min="0" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -372,8 +371,8 @@ export function DevisForm({ defaultValues, onSubmit }: DevisFormProps) {
           )}
         />
 
-        <Button type="submit" className="hidden">
-          Soumettre
+        <Button type="button" className="bg-orange-400 text-black hover:bg-orange-600" onClick={() => handleSubmit()}>
+          Aperçu du devis
         </Button>
       </form>
     </Form>

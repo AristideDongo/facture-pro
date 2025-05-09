@@ -12,7 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useInvoiceStore } from "@/hooks/invoices/useInvoiceForm";
+import { useInvoiceStore } from "@/hooks/invoices/useInvoice";
 import { formatFCFA } from "@/lib/format";
 import { wrapText } from "@/lib/wrapText";
 import { ItemValues } from "@/types/invoiceSchema";

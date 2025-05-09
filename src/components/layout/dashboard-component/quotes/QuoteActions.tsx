@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { FileDown, RefreshCw } from "lucide-react"
 import { DevisInfo } from "@/types/quoteSchema"
+import { useRouter } from "next/navigation"
 
 interface DevisActionsProps {
   devisInfo: DevisInfo
@@ -15,11 +16,13 @@ export function DevisActions({
   resetDevis 
 }: DevisActionsProps) {
   const [isGenerating, setIsGenerating] = useState(false)
+  const router = useRouter()
 
   // Fonction pour générer le PDF
   const generatePDF = async () => {
     try {
       setIsGenerating(true)
+      router.push('/dashboard/quotes/pdfquote')
     } catch (error) {
       console.error("Erreur lors de la génération du PDF:", error)
       alert("Une erreur est survenue lors de la génération du PDF.")
@@ -30,8 +33,6 @@ export function DevisActions({
 
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-xl font-semibold">Actions</h2>
-
       <div className="flex flex-wrap gap-4">
         <Button onClick={generatePDF} disabled={isGenerating} className="flex bg-orange-400 text-black hover:bg-orange-600 items-center">
           <FileDown className="mr-2 h-4 w-4" />

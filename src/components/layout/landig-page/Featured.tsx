@@ -3,7 +3,6 @@ import { features } from "@/data/featured";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
-import ImageFeat from "@/assets/home/homeassets.jpg";
 import Image from "next/image";
 
 export default function Feature() {
@@ -127,7 +126,7 @@ export default function Feature() {
           >
             <Image
               alt="Product screenshot"
-              src={ImageFeat}
+              src='/assets/home/homeassets.jpg'
               width={2432}
               height={2642}
               className="w-[60rem] max-w-[100rem] h-full rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"

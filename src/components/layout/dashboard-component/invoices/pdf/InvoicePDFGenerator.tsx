@@ -1,6 +1,6 @@
 import React from 'react';
 import { Page, Text, View, Document } from '@react-pdf/renderer';
-import { styles } from './invoice-style-pdf';
+import { styles } from './invoiceStylePdf';
 import { ClientInfoValues, CompagnyInfoValues, InvoiceDetailsValues, ItemValues } from '@/types/invoiceSchema';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
