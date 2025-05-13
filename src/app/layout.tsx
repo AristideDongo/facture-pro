@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import '@fontsource-variable/playfair-display';
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: "FacturePro",
@@ -16,6 +17,7 @@ export default function RootLayout({
     <html lang="fr">
       <body>
         {children}
+        <Analytics />
       </body>
     </html>
   );

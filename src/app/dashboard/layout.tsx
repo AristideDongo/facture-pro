@@ -2,6 +2,7 @@ import NavbarDashboard from '@/components/layout/navigation/dashboard-navigation
 import SidebarDashboard from '@/components/layout/navigation/dashboard-navigation/SidebarDashboard';
 import { Metadata } from 'next';
 import { Toaster } from 'sonner';
+import { Analytics } from "@vercel/analytics/next"
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
   return (
+    <body>
     <div className="flex h-screen bg-orange-100">
       <SidebarDashboard />
       <div className="flex flex-col flex-1 overflow-hidden">
@@ -27,5 +29,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         </main>
       </div>
     </div>
+    <Analytics />
+    </body>
   );
 }
