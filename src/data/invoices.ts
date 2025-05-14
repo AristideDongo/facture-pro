@@ -3,7 +3,7 @@ export const invoices = [
     clientInfo: {
       name: "Client 1",
       address: "123 Rue de la Paix\nAbidjan, Côte d'Ivoire",
-      phone: "+225 01 23 45 67",
+      phone: "0123456700",
       email: "client1@example.com",
     },
     compagnyInfo: {
@@ -23,8 +23,8 @@ export const invoices = [
     ],
     invoiceDetails: {
       invoiceNumber: "FACT-0001",
-      issueDate: new Date("2025-05-01"),
-      dueDate: new Date("2025-05-15"),
+      issueDate: "2025-05-01",
+      dueDate: "2025-05-15",
       paymentMethod: "Virement bancaire",
       currency: "XOF",
       status: "pending",
@@ -37,7 +37,7 @@ export const invoices = [
     clientInfo: {
       name: "Client 2",
       address: "456 Rue Marchande\nYamoussoukro, Côte d'Ivoire",
-      phone: "+225 02 34 56 78",
+      phone: "0234567800",
       email: "client2@example.com",
     },
     compagnyInfo: {
@@ -57,8 +57,8 @@ export const invoices = [
     ],
     invoiceDetails: {
       invoiceNumber: "FACT-0002",
-      issueDate: new Date("2025-05-01"),
-      dueDate: new Date("2025-05-15"),
+      issueDate: "2025-05-01",
+      dueDate: "2025-05-15",
       paymentMethod: "Espèces",
       currency: "XOF",
       status: "paid",
@@ -69,9 +69,9 @@ export const invoices = [
   },
   {
     clientInfo: {
-      name: "Client 2",
+      name: "Client 3",
       address: "456 Rue Marchande\nYamoussoukro, Côte d'Ivoire",
-      phone: "+225 02 34 56 78",
+      phone: "0002345678",
       email: "client2@example.com",
     },
     compagnyInfo: {
@@ -91,8 +91,8 @@ export const invoices = [
     ],
     invoiceDetails: {
       invoiceNumber: "FACT-0002",
-      issueDate: new Date("2025-05-01"),
-      dueDate: new Date("2025-05-15"),
+      issueDate: "2025-05-01",
+      dueDate: "2025-05-15",
       paymentMethod: "Espèces",
       currency: "XOF",
       status: "overdue",

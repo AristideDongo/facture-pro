@@ -22,7 +22,7 @@ export default function page() {
   return (
     <div className="p-2 mt-7">
       <div className="flex mx-5 justify-between">
-      <h1 className="text-3xl font-semibold mb-3">Dévis</h1>
+      <h1 className="text-3xl font-bold mb-3">Gestions des Dévis</h1>
       <Link href='/dashboard/quotes/new'>
       <Button className="flex bg-orange-400 text-black hover:bg-orange-500 cursor-pointer">
         <FilePlus className=""/>

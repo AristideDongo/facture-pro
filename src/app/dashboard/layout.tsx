@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
   return (
-    <body>
+    <>
     <div className="flex h-screen bg-orange-100">
       <SidebarDashboard />
       <div className="flex flex-col flex-1 overflow-hidden">
@@ -30,6 +30,6 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       </div>
     </div>
     <Analytics />
-    </body>
+    </>
   );
 }

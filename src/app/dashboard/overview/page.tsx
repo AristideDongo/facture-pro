@@ -22,7 +22,7 @@ export default function page() {
         }, 0);
   return (
     <div className="p-2 mt-7">
-      <h1 className="text-3xl font-semibold mb-3">Tableau de bord</h1>
+      <h1 className="text-3xl font-bold mb-3">Tableau de bord</h1>
       <div className="flex gap-3">
         <StatCard
           title="Factures totales"
