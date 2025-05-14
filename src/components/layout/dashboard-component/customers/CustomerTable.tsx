@@ -6,9 +6,10 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { invoices } from "@/data/invoices"
 import { quote } from "@/data/quotes"
 import Link from "next/link"
+import { ClientInfo } from "@/types/customerTableType"
 
 const clients = (() => {
-    const clientMap: Record<string, any> = {}
+    const clientMap: Record<string, ClientInfo> = {}
 
     for (const inv of invoices) {
     const info = inv.clientInfo

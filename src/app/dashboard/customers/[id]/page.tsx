@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default async function Page({ params }: Props) {
-  const clientId = params.id
+    const clientId = params.id
 
   // Trouver les infos du client depuis invoices ou quote
   const clientInvoices = invoices.filter(inv => {
