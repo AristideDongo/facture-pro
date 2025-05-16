@@ -59,7 +59,7 @@ export default function ClientDetailsComponent({ client }: ClientDetailsProps) {
                 <CardTitle>Factures</CardTitle>
                 <CardDescription>Historique des factures</CardDescription>
               </div>
-              <Button size="sm">
+              <Button className="bg-orange-400 hover:bg-orange-500 text-black" size="sm">
                 <FileText className="mr-2 h-4 w-4" />
                 Nouvelle Facture
               </Button>
@@ -88,7 +88,7 @@ export default function ClientDetailsComponent({ client }: ClientDetailsProps) {
                 <CardTitle>Devis</CardTitle>
                 <CardDescription>Historique des devis</CardDescription>
               </div>
-              <Button size="sm">
+              <Button className="bg-orange-400 hover:bg-orange-500 text-black" size="sm">
                 <FileText className="mr-2 h-4 w-4" />
                 Nouveau Devis
               </Button>
