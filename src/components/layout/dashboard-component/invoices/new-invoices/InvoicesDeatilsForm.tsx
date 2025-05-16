@@ -25,8 +25,8 @@ export function InvoiceDetailsForm() {
     resolver: zodResolver(invoiceDetailsSchema),
     defaultValues: invoiceDetails || {
         invoiceNumber: `INV-${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, "0")}-`,
-        issueDate: new Date(),
-        dueDate: new Date(new Date().setDate(new Date().getDate() + 30)),
+        issueDate: '',
+        dueDate: '',
         status: "payé",
         currency: "XOF",
         paymentTerms: "30 jours",
@@ -144,7 +144,14 @@ export function InvoiceDetailsForm() {
                     </FormControl>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar mode="single" selected={field.value} onSelect={field.onChange} initialFocus />
+<Calendar
+  mode="single"
+  selected={field.value ? new Date(field.value) : undefined}
+  onSelect={(date) => {
+    field.onChange(date ? date.toLocaleDateString() : "")
+  }}
+  initialFocus
+/>
                   </PopoverContent>
                 </Popover>
                 <FormMessage />
@@ -171,7 +178,14 @@ export function InvoiceDetailsForm() {
                     </FormControl>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar mode="single" selected={field.value} onSelect={field.onChange} initialFocus />
+<Calendar
+  mode="single"
+  selected={field.value ? new Date(field.value) : undefined}
+  onSelect={(date) => {
+    field.onChange(date ? date.toLocaleDateString() : "")
+  }}
+  initialFocus
+/>
                   </PopoverContent>
                 </Popover>
                 <FormMessage />
