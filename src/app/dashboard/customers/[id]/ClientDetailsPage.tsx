@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { formatFCFA } from "@/lib/format"
 import { ClientDetailsProps } from "@/types/ClientTypeForDetails"
-import { ArrowLeft, FileText, Pencil } from "lucide-react"
+import { ArrowLeft, FileText } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 export default function ClientDetailsComponent({ client }: ClientDetailsProps) {
@@ -20,10 +20,7 @@ export default function ClientDetailsComponent({ client }: ClientDetailsProps) {
         <Button onClick={back} variant="outline" size="icon">
           <ArrowLeft className="h-4 w-4" />
         </Button>
-        <h1 className="text-3xl font-bold">{client.name}</h1>
-        <Button variant="outline" size="icon">
-          <Pencil className="h-4 w-4" />
-        </Button>
+        <h1 className="text-3xl font-bold">Détails Client</h1>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -34,7 +31,7 @@ export default function ClientDetailsComponent({ client }: ClientDetailsProps) {
           <CardContent className="space-y-4">
             <div>
               <p className="text-sm text-muted-foreground">Contact</p>
-              <p>{client.contact}</p>
+              <p>{client.name}</p>
             </div>
             <div>
               <p className="text-sm text-muted-foreground">Email</p>

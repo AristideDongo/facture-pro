@@ -1,7 +1,6 @@
 interface ClientType {
   id: string
   name: string
-  contact: string
   email: string
   phone: string
   address: string
