@@ -40,7 +40,7 @@ export default async function Page({ params }: Props) {
     notes: "",
     invoices: clientInvoices.map((inv) => ({
       id: inv.invoiceDetails.invoiceNumber,
-      date: inv.invoiceDetails.dueDate,
+      date: inv.invoiceDetails.dueDate.toLocaleDateString(),
       amount: inv.amount,
       status: inv.invoiceDetails.status,
     })),

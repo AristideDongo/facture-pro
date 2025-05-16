@@ -23,8 +23,8 @@ export const invoices = [
     ],
     invoiceDetails: {
       invoiceNumber: "FACT-0001",
-      issueDate: "2025-05-01",
-      dueDate: "2025-05-15",
+      issueDate: new Date("2025-05-01"),
+      dueDate: new Date("2025-05-15"),
       paymentMethod: "Virement bancaire",
       currency: "XOF",
       status: "pending",
@@ -57,8 +57,8 @@ export const invoices = [
     ],
     invoiceDetails: {
       invoiceNumber: "FACT-0002",
-      issueDate: "2025-05-01",
-      dueDate: "2025-05-15",
+      issueDate: new Date("2025-05-01"),
+      dueDate: new Date("2025-05-15"),
       paymentMethod: "Espèces",
       currency: "XOF",
       status: "paid",
@@ -91,8 +91,8 @@ export const invoices = [
     ],
     invoiceDetails: {
       invoiceNumber: "FACT-0002",
-      issueDate: "2025-05-01",
-      dueDate: "2025-05-15",
+      issueDate: new Date("2025-05-01"),
+      dueDate: new Date("2025-05-15"),
       paymentMethod: "Espèces",
       currency: "XOF",
       status: "overdue",

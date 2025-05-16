@@ -2,8 +2,8 @@ import { z } from "zod"
 
 export const invoiceDetailsSchema = z.object({
   invoiceNumber: z.string().min(1, { message: "Le numéro de facture est requis" }),
-  issueDate: z.string({ required_error: "La date d'émission est requise" }),
-  dueDate: z.string({ required_error: "La date d'échéance est requise" }),
+  issueDate: z.date({ required_error: "La date d'émission est requise" }),
+  dueDate: z.date({ required_error: "La date d'échéance est requise" }),
   status: z.string({}),
   paymentTerms: z.string().optional(),
   paymentMethod: z.string().optional(),

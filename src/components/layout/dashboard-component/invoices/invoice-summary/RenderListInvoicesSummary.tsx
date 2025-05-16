@@ -33,7 +33,7 @@ export default function RenderListInvoiceSummary({filteredInvoiceSummary}: props
               <CardContent className="p-0 text-right">
                 <div className="font-medium">{formatFCFA(invoice.amount)}</div>
                 <div className="text-sm text-muted-foreground">
-                  Échéance: <span>{invoice.invoiceDetails.dueDate}</span>
+                  Échéance: <span>{invoice.invoiceDetails.dueDate.toLocaleDateString()}</span>
                 </div>
                 <div className='text-center'>{invoice.invoiceDetails.status !== 'quote' && getStatus(invoice.invoiceDetails.status)}</div>
               </CardContent>
