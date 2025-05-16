@@ -30,7 +30,7 @@ export default function ClientDetailsComponent({ client }: ClientDetailsProps) {
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <p className="text-sm text-muted-foreground">Contact</p>
+              <p className="text-sm text-muted-foreground">Nom du Client</p>
               <p>{client.name}</p>
             </div>
             <div>

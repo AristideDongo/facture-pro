@@ -38,7 +38,7 @@ export default async function Page({ params }: Props) {
     phone: clientInvoices[0]?.clientInfo?.phone || clientQuotes[0]?.clientQuoteInfo?.clientPhone,
     address: clientInvoices[0]?.clientInfo?.address || clientQuotes[0]?.clientQuoteInfo?.clientAddress,
     notes: "",
-    invoices: clientInvoices.map((inv, i) => ({
+    invoices: clientInvoices.map((inv) => ({
       id: inv.invoiceDetails.invoiceNumber,
       date: inv.invoiceDetails.dueDate,
       amount: inv.amount,

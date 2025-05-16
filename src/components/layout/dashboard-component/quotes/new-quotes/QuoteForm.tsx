@@ -54,7 +54,7 @@ export function DevisForm({ defaultValues, onSubmit }: DevisFormProps) {
     });
 
     return () => subscription.unsubscribe();
-  }, [form, handleSubmit, addPrestation]);
+  }, [form, addPrestation]);
 
   return (
     <Form {...form}>
